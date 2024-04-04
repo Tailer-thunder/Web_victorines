@@ -4,54 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Selection</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
+            background-color: #f8f9fa;
+            padding-top: 50px;
         }
         .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
         }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        ul {
+        .quiz-list {
             list-style-type: none;
             padding: 0;
-            margin: 0;
         }
-        li {
+        .quiz-list li {
+            background-color: #fff;
             margin-bottom: 10px;
-        }
-        a {
-            display: block;
             padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+            border-radius: 5px;
         }
-        a:hover {
-            background-color: #0056b3;
+        .quiz-list li a {
+            text-decoration: none;
+            color: #007bff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Choose a Quiz</h1>
-        <ul>
+        <h2 class="text-center">Quiz Selection</h2>
+        <ul class="quiz-list">
             <li><a href="#">Quiz 1</a></li>
             <li><a href="#">Quiz 2</a></li>
-            <!-- Add more quizzes as needed -->
+            <li><a href="#">Quiz 3</a></li>
+            <!-- Add more quiz links here -->
         </ul>
     </div>
 </body>
