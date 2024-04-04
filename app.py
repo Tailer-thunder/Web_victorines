@@ -70,7 +70,10 @@ def login():
 @app.route('/quiz_selection')
 def quiz_selection():
     return render_template('quiz_selection.html')
-
+@app.route('/start_quiz/<quiz_id>', methods=['GET', 'POST'])
+def start_quiz(quiz_id):
+    # Ваша логика обработки викторины
+    pass
 
 if __name__ == '__main__':
     with app.app_context():

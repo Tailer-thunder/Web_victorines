@@ -1,0 +1,23 @@
+<!-- В файле breaking_bad_quiz.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breaking Bad Quiz</title>
+</head>
+<body>
+    <h1>Breaking Bad Quiz</h1>
+    <form action="{{ url_for('breaking_bad_quiz') }}" method="post">
+        {% for question in questions %}
+            <h3>{{ question.question_text }}</h3>
+            <input type="radio" name="question_{{ question.id }}" value="1"> {{ question.option1 }}<br>
+            <input type="radio" name="question_{{ question.id }}" value="2"> {{ question.option2 }}<br>
+            <input type="radio" name="question_{{ question.id }}" value="3"> {{ question.option3 }}<br>
+            <input type="radio" name="question_{{ question.id }}" value="4"> {{ question.option4 }}<br>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

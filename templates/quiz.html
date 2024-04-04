@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breaking Bad Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Breaking Bad Quiz</h2>
+        <form action="{{ url_for('quiz_results') }}" method="POST">
+            {% for question in questions %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ question.question }}</h5>
+                    {% for option in question.options %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}" value="{{ option }}">
+                        <label class="form-check-label" for="option{{ loop.index }}">{{ option }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+        </form>
+    </div>
+</body>
+</html>
