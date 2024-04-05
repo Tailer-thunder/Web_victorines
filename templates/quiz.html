@@ -8,23 +8,54 @@
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center">Breaking Bad Quiz</h2>
-        <form action="{{ url_for('quiz_results') }}" method="POST">
-            {% for question in questions %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ question.question }}</h5>
-                    {% for option in question.options %}
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="question{{ loop.index }}" id="option{{ loop.index }}" value="{{ option }}">
-                        <label class="form-check-label" for="option{{ loop.index }}">{{ option }}</label>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+        <h1 class="mt-5 mb-4">Breaking Bad Quiz</h1>
+        <div id="timer"></div> <!-- Элемент для отображения таймера -->
+        <form action="/submit_quiz_answers" method="post">
+            <ul class="list-unstyled">
+                {% for question in questions %}
+                    <li class="mb-4">
+                        <p>{{ question['question'] }}</p>
+                        <ul class="list-unstyled ml-3">
+                            {% for answer in question['answers'] %}
+                                <li>
+                                    <input type="radio" id="{{ answer }}" name="{{ question['question'] }}" value="{{ answer }}" class="mr-2">
+                                    <label for="{{ answer }}">{{ answer }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit" class="btn btn-primary">Submit Answers</button>
         </form>
     </div>
+
+    <script>
+        // Функция для запуска таймера на JS
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration;
+                    alert('Time up! Quiz submission is automatic now.');
+                    document.querySelector('form').submit(); // Автоматическая отправка формы по истечении времени
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var fiveMinutes = 60 * 5,
+                display = document.querySelector('#timer');
+            startTimer(fiveMinutes, display);
+        };
+    </script>
 </body>
 </html>
