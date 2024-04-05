@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Quiz Results</h1>
-    <p>You got {{ num_correct }} out of {{ total_questions }} correct!</p>
-
-    <a href="{{ url_for('quiz_selection') }}" class="btn btn-primary">Choose Another Quiz</a>
+    <div class="container">
+        <h1>Quiz Results</h1>
+        <p>You got {{ num_correct }} out of {{ total_questions }} correct!</p>
+        <a href="{{ url_for('quiz_selection') }}" class="btn btn-primary">Choose Another Quiz</a>
+    </div>
 </body>
 </html>
