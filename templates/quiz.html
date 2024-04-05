@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Breaking Bad Quiz</title>
+    <title>{{ quiz_title }} Quiz</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-5 mb-4">Breaking Bad Quiz</h1>
-        <div id="timer"></div> <!-- Элемент для отображения таймера -->
-        <form action="/submit_quiz_answers" method="post">
+        <h1 class="mt-5 mb-4">{{ quiz_title }} Quiz</h1>
+        <div id="timer"></div>
+        <form action="/submit_quiz_answers?quiz_name={{ quiz_title }}" method="post">
             <ul class="list-unstyled">
                 {% for question in questions %}
                     <li class="mb-4">
