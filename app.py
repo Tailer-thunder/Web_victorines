@@ -112,9 +112,10 @@ class QuizzesManager:
         self.quizzes_set = frozenset(new_quizzes_set)
 
         # Добавление нового имени в файл с именами викторин
-        with open(self.directory + "/names.json", encoding="utf-8", mode="rw") as quizzes_names_file:
+        with open(self.directory + "/names.json", encoding="utf-8", mode="r") as quizzes_names_file:
             new_quizzes_names = self.__load(quizzes_names_file)
-            new_quizzes_names[str(quiz_id)] = quiz_name
+        new_quizzes_names[str(quiz_id)] = quiz_name
+        with open(self.directory + "/names.json", encoding="utf-8", mode="w") as quizzes_names_file:
             self.__dump(new_quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
         # Добавление нового файла с вопросами новой викторины
         with open(self.__id_to_path(quiz_id), encoding="utf-8", mode="w") as questions_file:
@@ -133,9 +134,10 @@ class QuizzesManager:
             self.__remove(self.__id_to_path(quiz_id))  # Удаление файла с вопросами викторины
 
             # Удаление имени из файла с именами викторин
-            with open(self.directory + "/names.json", encoding="utf-8", mode="rw") as quizzes_names_file:
+            with open(self.directory + "/names.json", encoding="utf-8", mode="r") as quizzes_names_file:
                 new_quizzes_names = self.__load(quizzes_names_file)
-                del new_quizzes_names[str(quiz_id)]
+            del new_quizzes_names[str(quiz_id)]
+            with open(self.directory + "/names.json", encoding="utf-8", mode="w") as quizzes_names_file:
                 self.__dump(new_quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
         else:
             raise ValueError(f"the quiz with id=={quiz_id} does not exist")
@@ -277,6 +279,8 @@ def quiz_results():
             total_questions = len(questions)
 
     session.pop('num_correct', None)
+    if num_correct > total_questions:
+        num_correct = total_questions
     return render_template('quiz_results.html', num_correct=num_correct, total_questions=total_questions)
 
 
