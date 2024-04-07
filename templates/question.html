@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Question</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Question {{ question_number }}</h1>
+        <h3>{{ question }}</h3>
+        <img src="{{ image }}" alt="">
+        <div id="timer"></div> <!-- Таймер -->
+        <form method="post">
+            {% for answer in answers %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="answer" id="{{ answer }}" value="{{ answer }}">
+                <label class="form-check-label" for="{{ answer }}">
+                    {{ answer }}
+                </label>
+            </div>
+            {% endfor %}
+            <input type="hidden" id="timeLeft" name="timeLeft"> <!-- Скрытое поле для передачи оставшегося времени -->
+            <input type="hidden" id="quizId" name="quizId" value="{{ quiz_id }}"> <!-- Скрытое поле для передачи идентификатора викторины -->
+            <input type="hidden" id="questionNumber" name="questionNumber" value="{{ question_number }}"> <!-- Скрытое поле для передачи номера текущего вопроса -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% if question_number > 1 %}
+            <a href="{{ url_for('quiz_question', quiz_id=quiz_id, question_number=question_number-1) }}" class="btn btn-secondary">Previous Question</a>
+        {% endif %}
+    </div>
+    <script>
+        window.onload = function() {
+            var timeLeft = getUrlParameter('timeLeft') ? parseInt(getUrlParameter('timeLeft')) : 600; // 10 минут в секундах
+
+            // Функция для обновления таймера каждую секунду
+            function updateTimer() {
+                var minutes = Math.floor(timeLeft / 60);
+                var seconds = timeLeft % 60;
+                document.getElementById('timer').innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                }
+            }
+
+            // Начать обновление таймера
+            var timerInterval = setInterval(updateTimer, 1000);
+
+            // Устанавливаем значение скрытого поля
+            document.getElementById('timeLeft').value = timeLeft;
+        };
+
+        // Функция для получения параметра из URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(window.location.href);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+    </script>
+</body>
+</html>
