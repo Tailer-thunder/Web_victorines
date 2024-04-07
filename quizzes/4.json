@@ -1,91 +1,91 @@
 [
   {
-    "question": "Когда крестилась Русь?",
+    "question": "When was Rus' baptized?",
     "answers": [
-      "48 г. до н.э.",
-      "877 г.",
-      "988 г.",
-      "1015 г.",
-      "1054 г.",
-      "1209 г.",
-      "1540 г.",
-      "2013 г."
+      "48 BC",
+      "877 AD",
+      "988 AD",
+      "1015 AD",
+      "1054 AD",
+      "1209 AD",
+      "1540 AD",
+      "2013 AD"
     ],
-    "correct_answer": "988 г."
+    "correct_answer": "988 AD"
   },
   {
-    "question": "Когда началось монгольское нашествие на Русь?",
+    "question": "When did the Mongol invasion of Rus' begin?",
     "answers": [
-      "1223 г.",
-      "1237 г.",
-      "1300 г.",
-      "1240 г.",
-      "1252 г."
+      "1223 AD",
+      "1237 AD",
+      "1300 AD",
+      "1240 AD",
+      "1252 AD"
     ],
-    "correct_answer": "1237 г."
+    "correct_answer": "1237 AD"
   },
   {
-    "question": "Когда было отменено крепостное право в России?",
+    "question": "When was serfdom abolished in Russia?",
     "answers": [
-      "1855 г.",
-      "1861 г.",
-      "1905 г.",
-      "1917 г."
+      "1855 AD",
+      "1861 AD",
+      "1905 AD",
+      "1917 AD"
     ],
-    "correct_answer": "1861 г."
+    "correct_answer": "1861 AD"
   },
   {
-    "question": "Когда произошла Октябрьская революция?",
+    "question": "When did the October Revolution occur?",
     "answers": [
-      "1905 г.",
-      "1912 г.",
-      "1915 г.",
-      "1917 г.",
-      "1899 г.",
-      "1919 г."
+      "1905 AD",
+      "1912 AD",
+      "1915 AD",
+      "1917 AD",
+      "1899 AD",
+      "1919 AD"
     ],
-    "correct_answer": "1917 г."
+    "correct_answer": "1917 AD"
   },
   {
-    "question": "Когда началась Великая Отечественная война?",
+    "question": "When did the Great Patriotic War (World War II) begin?",
     "answers": [
-      "1943 г.",
-      "1951 г.",
-      "1941 г.",
-      "1939 г."
+      "1943 AD",
+      "1951 AD",
+      "1941 AD",
+      "1939 AD"
     ],
-    "correct_answer": "1941 г."
+    "correct_answer": "1941 AD"
   },
   {
-    "question": "Когда был запущен первый советский спутник “Спутник-1”?",
+    "question": "When was the first Soviet satellite, Sputnik-1, launched?",
     "answers": [
-      "1949 г.",
-      "1952 г.",
-      "1953 г.",
-      "1954 г.",
-      "1955 г.",
-      "1957 г."
+      "1949 AD",
+      "1952 AD",
+      "1953 AD",
+      "1954 AD",
+      "1955 AD",
+      "1957 AD"
     ],
-    "correct_answer": "1957 г."
+    "correct_answer": "1957 AD"
   },
   {
-    "question": "Когда распался Советский Союз?",
+    "question": "When did the Soviet Union collapse?",
     "answers": [
-      "1989 г.",
-      "1991 г.",
-      "1992 г.",
-      "1986 г."
+      "1989 AD",
+      "1991 AD",
+      "1992 AD",
+      "1986 AD"
     ],
-    "correct_answer": "1991 г."
+    "correct_answer": "1991 AD"
   },
   {
-    "question": "Когда произошла Чернобыльская катастрофа?",
+    "question": "When did the Chernobyl disaster occur?",
     "answers": [
-      "1976г. ",
-      "1978 г. ",
-      "1984 г. ",
-      "1986 г. "
+      "1976 AD",
+      "1978 AD",
+      "1984 AD",
+      "1986 AD"
     ],
-    "correct_answer": "1986 г. "
+    "correct_answer": "1986 AD"
   }
 ]

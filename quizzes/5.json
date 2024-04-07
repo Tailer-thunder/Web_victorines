@@ -1,82 +1,82 @@
 [
   {
-    "question": "А: Фотоны не имеют массы покоя.\nБ: Фотоны обладают импульсом.",
+    "question": "A: Photons have no rest mass.\nB: Photons possess momentum.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Оба факта правдивы"
+    "correct_answer": "Both facts are true"
   },
   {
-    "question": "А: Все черные дыры в конечном итоге испарятся из-за излучения Хокинга.\nБ: Сверхмассивные черные дыры могут быть в миллиарды раз больше массы Солнца.",
+    "question": "A: All black holes will eventually evaporate due to Hawking radiation.\nB: Supermassive black holes can be billions of times more massive than the Sun.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Оба факта правдивы"
+    "correct_answer": "Both facts are true"
   },
   {
-    "question": "А: Теория струн предполагает существование дополнительных пространственных измерений, которые свернуты в крошечные размеры.\nБ: Теория струн подтверждена экспериментально.",
+    "question": "A: String theory postulates the existence of additional spatial dimensions that are curled up into tiny sizes.\nB: String theory has been experimentally confirmed.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Правдив только А"
+    "correct_answer": "True only A"
   },
   {
-    "question": "А: Квантовая запутанность позволяет двум частицам быть связанными друг с другом, независимо от расстояния между ними.\nБ: Квантовая запутанность нарушает теорию относительности.",
+    "question": "A: Quantum entanglement allows two particles to be correlated with each other regardless of the distance between them.\nB: Quantum entanglement violates the theory of relativity.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Правдив только А"
+    "correct_answer": "True only A"
   },
   {
-    "question": "А: Нейроны в мозге общаются друг с другом с помощью электрических и химических сигналов.\nБ: Мозг человека способен на неограниченное обучение и запоминание.",
+    "question": "A: Neurons in the brain communicate with each other using electrical and chemical signals.\nB: The human brain is capable of unlimited learning and memory.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Оба факта правдивы"
+    "correct_answer": "Both facts are true"
   },
   {
-    "question": "А: Деятельность человека оказывает влияние на глобальное потепление.\nБ: Последствия глобального потепления могут включать повышение уровня моря, экстремальные погодные явления и изменение биоразнообразия.",
+    "question": "A: Human activity influences global warming.\nB: Consequences of global warming may include sea level rise, extreme weather events, and changes in biodiversity.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Оба факта правдивы"
+    "correct_answer": "Both facts are true"
   },
   {
-    "question": "А: Эйнштейн разработал теорию квантовой гравитации.\nБ: Ньютон занимался специальной теорией относительности.",
+    "question": "A: Einstein developed the theory of quantum gravity.\nB: Newton worked on the special theory of relativity.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Оба факта ложны"
+    "correct_answer": "Both facts are false"
   },
   {
-    "question": "А: Позитроны не имеют заряда.\nБ: У микроволнового излучения период колебаний больше, чем у гамма излучения.",
+    "question": "A: Positrons have no charge.\nB: The period of oscillation of microwave radiation is greater than that of gamma radiation.",
     "answers": [
-      "Правдив только А",
-      "Правдив только Б",
-      "Оба факта правдивы",
-      "Оба факта ложны"
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
     ],
-    "correct_answer": "Правдив только Б"
+    "correct_answer": "True only B"
   }
 ]

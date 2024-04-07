@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Who directed the movie 'Breakfast at Tiffany's'?",
+    "answers": [
+      "Stanley Kubrick",
+      "Alfred Hitchcock",
+      "Billy Wilder",
+      "Blake Edwards"
+    ],
+    "correct_answer": "Blake Edwards",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "Which film was the first color film to win the Academy Award for Best Picture?",
+    "answers": [
+      "The Wizard of Oz",
+      "The Sound of Music",
+      "Ben-Hur",
+      "The Citadel"
+    ],
+    "correct_answer": "The Wizard of Oz",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "Who played the main role in the movie 'The Godfather'?",
+    "answers": [
+      "Robert De Niro",
+      "Al Pacino",
+      "Marlon Brando",
+      "Johnny Depp"
+    ],
+    "correct_answer": "Marlon Brando",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "What is the name of the first film made by the Lumiere brothers?",
+    "answers": [
+      "Train arrival at La Ciotat station",
+      "Cleaning the floor",
+      "Breakfast",
+      "Lumiere family"
+    ],
+    "correct_answer": "Train arrival at La Ciotat station",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "Which film is the highest-grossing film in the history of cinema?",
+    "answers": [
+      "Avengers: Endgame",
+      "Avatar",
+      "Star Wars: The Force Awakens",
+      "Titanic"
+    ],
+    "correct_answer": "Titanic",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "In what year was Disney's first animated feature film released?",
+    "answers": [
+      "1937",
+      "1950",
+      "1963",
+      "1989"
+    ],
+    "correct_answer": "1937",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "Who made the movie 'Some Like It Hot'?",
+    "answers": [
+      "Francis Ford Coppola",
+      "Stanley Donen",
+      "Damien Chazelle",
+      "Billy Wilder"
+    ],
+    "correct_answer": "Stanley Donen",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "What movie starred Charlize Theron as a painfully lonely astronaut?",
+    "answers": [
+      "Alien",
+      "March",
+      "Gravity",
+      "Oblivion"
+    ],
+    "correct_answer": "March",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "Who played the main male role in the film 'Insomnia' (2002)?",
+    "answers": [
+      "Colin Farrell",
+      "Al Pacino",
+      "Leonardo DiCaprio",
+      "Billy Wilder"
+    ],
+    "correct_answer": "Al Pacino",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  },
+  {
+    "question": "Which film brought actor Tom Hanks his first Academy Award for Best Actor?",
+    "answers": [
+      "Saving Private Ryan",
+      "Forrest Gump",
+      "The Green Mile",
+      "Ghost"
+    ],
+    "correct_answer": "Forrest Gump",
+    "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"
+  }
+]

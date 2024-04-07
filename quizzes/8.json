@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Which river flows through Paris?",
+    "answers": [
+      "Seine",
+      "Rhine",
+      "Loire",
+      "Garonne"
+    ],
+    "correct_answer": "Seine",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "What is the name of the highest peak in France?",
+    "answers": [
+      "Mont Blanc",
+      "Elbrus",
+      "Matterhorn",
+      "Eiger"
+    ],
+    "correct_answer": "Mont Blanc",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "Which city is the capital of France?",
+    "answers": [
+      "Marseille",
+      "Lyon",
+      "Toulouse",
+      "Paris"
+    ],
+    "correct_answer": "Paris",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "Which lake is located on the border of France and Switzerland?",
+    "answers": [
+      "Geneva",
+      "Constance",
+      "Como",
+      "Garda"
+    ],
+    "correct_answer": "Geneva",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "Which region of France is famous for its wineries?",
+    "answers": [
+      "Loire",
+      "Alsace",
+      "Bordeaux",
+      "Normandy"
+    ],
+    "correct_answer": "Bordeaux",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "Which sea washes the southern coast of France?",
+    "answers": [
+      "Mediterranean",
+      "Black",
+      "Caspian",
+      "Azure"
+    ],
+    "correct_answer": "Mediterranean",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "Which mountain range lies in the southeast of France?",
+    "answers": [
+      "Pyrenees",
+      "Alps",
+      "Carpathians",
+      "Apennines"
+    ],
+    "correct_answer": "Alps",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "What is the name of the archipelago in the Mediterranean Sea that belongs to France?",
+    "answers": [
+      "Corsica",
+      "Sardinia",
+      "Sicily",
+      "Balearics"
+    ],
+    "correct_answer": "Corsica",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "What is the name of the river that flows through Lyon?",
+    "answers": [
+      "Loire",
+      "Seine",
+      "Rhone",
+      "Garonne"
+    ],
+    "correct_answer": "Rhone",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  },
+  {
+    "question": "What is the name of the city located on the Cote d'Azur of France?",
+    "answers": [
+      "Nice",
+      "Marseille",
+      "Cannes",
+      "Monaco"
+    ],
+    "correct_answer": "Nice",
+    "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"
+  }
+]

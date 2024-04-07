@@ -1,102 +1,102 @@
 [
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Звездные войны: Эпизод V — Империя наносит ответный удар»?",
+    "question": "Which quote was spoken in the movie:\n\"Star Wars: Episode V - The Empire Strikes Back\"?",
     "answers": [
-      "“Люк, я твой брат.”",
-      "“Люк, я твой отец.”",
-      "“Люк, я твой дядя.”",
-      "Люк, я твой наставник."
+      "\"Luke, I am your brother.\"",
+      "\"Luke, I am your father.\"",
+      "\"Luke, I am your uncle.\"",
+      "Luke, I am your mentor."
     ],
-    "correct_answer": "“Люк, я твой отец.”"
+    "correct_answer": "\"Luke, I am your father.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Звездные войны: Эпизод III — Месть ситхов»?",
+    "question": "Which quote was spoken in the movie:\n\"Star Wars: Episode III - Revenge of the Sith\"?",
     "answers": [
-      "“Я в опасности, Скайуокер. Спаси меня.”",
-      "“Я здесь, чтобы спасти тебя, Оби-Ван.”",
-      "“Я не в опасности, Скайуокер. Я здесь, чтобы спасти тебя.”",
-      "“Я здесь, чтобы сразиться с Дартом Вейдером.”"
+      "\"I'm in danger, Skywalker. Save me.\"",
+      "\"I'm here to save you, Obi-Wan.\"",
+      "\"I'm not in danger, Skywalker. I'm here to save you.\"",
+      "\"I'm here to fight Darth Vader.\""
     ],
-    "correct_answer": "“Я не в опасности, Скайуокер. Я здесь, чтобы спасти тебя.”"
+    "correct_answer": "\"I'm not in danger, Skywalker. I'm here to save you.\""
   },
   {
-    "question": "Какая цитата была произнесена в сериале:\n«Друзья»?",
+    "question": "Which quote was spoken in the TV series:\n\"Friends\"?",
     "answers": [
-      "“Запомни, все идеальны.”",
-      "“Запомни, ошибки нельзя прощать.”",
-      "“Запомни, совершенство недостижимо.”",
-      "“Запомни, никто не идеален. Каждый совершает ошибки, но важно учиться на них.”"
+      "\"Remember, everyone is perfect.\"",
+      "\"Remember, mistakes cannot be forgiven.\"",
+      "\"Remember, perfection is unattainable.\"",
+      "\"Remember, nobody's perfect. Everyone makes mistakes, but it's important to learn from them.\""
     ],
-    "correct_answer": "“Запомни, никто не идеален. Каждый совершает ошибки, но важно учиться на них.”"
+    "correct_answer": "\"Remember, nobody's perfect. Everyone makes mistakes, but it's important to learn from them.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Храброе сердце»?",
+    "question": "Which quote was spoken in the movie:\n\"Braveheart\"?",
     "answers": [
-      "“Мир принадлежит тем, кто богат и могущественен.”",
-      "“Мир принадлежит тем, кто следует правилам.”",
-      "“Мир принадлежит тем, кто удачлив.”",
-      "“Мир принадлежит тем, кто достаточно смел, чтобы взять его.”"
+      "\"The world belongs to those who are rich and powerful.\"",
+      "\"The world belongs to those who follow the rules.\"",
+      "\"The world belongs to those who are lucky.\"",
+      "\"The world belongs to those who are brave enough to seize it.\""
     ],
-    "correct_answer": "“Мир принадлежит тем, кто достаточно смел, чтобы взять его.”"
+    "correct_answer": "\"The world belongs to those who are brave enough to seize it.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Дневник памяти»?",
+    "question": "Which quote was spoken in the movie:\n\"The Notebook\"?",
     "answers": [
-      "“Если ты любишь кого-то, отпусти его.”",
-      "“Если ты любишь кого-то, держись за него изо всех сил.”",
-      "“Если ты любишь кого-то, никогда не отпускай его.”",
-      "“Если ты любишь кого-то, он всегда будет твоим.”"
+      "\"If you love someone, let them go.\"",
+      "\"If you love someone, hold onto them with all your might.\"",
+      "\"If you love someone, never let them go.\"",
+      "\"If you love someone, they will always be yours.\""
     ],
-    "correct_answer": "“Если ты любишь кого-то, отпусти его.”"
+    "correct_answer": "\"If you love someone, let them go.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«В погоне за счастьем»?",
+    "question": "Which quote was spoken in the movie:\n\"The Pursuit of Happyness\"?",
     "answers": [
-      "“Не слушай других и следуй своим мечтам.”",
-      "“Если люди говорят тебе, что ты не можешь что-то сделать, значит, ты можешь.”",
-      "“Откажись от своей мечты, если она слишком сложна.”",
-      "“Не позволяй никому говорить тебе, что ты не можешь чего-то сделать. Если у тебя есть мечта, ты должен ее защищать.”"
+      "\"Don't listen to others and follow your dreams.\"",
+      "\"If people tell you that you can't do something, it means you can.\"",
+      "\"Give up on your dream if it's too difficult.\"",
+      "\"Don't let anyone tell you that you can't do something. If you have a dream, you have to protect it.\""
     ],
-    "correct_answer": "“Не позволяй никому говорить тебе, что ты не можешь чего-то сделать. Если у тебя есть мечта, ты должен ее защищать.”"
+    "correct_answer": "\"Don't let anyone tell you that you can't do something. If you have a dream, you have to protect it.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Лесная чаща»?",
+    "question": "Which quote was spoken in the movie:\n\"Into the Woods\"?",
     "answers": [
-      "“Я верю, что все происходит не случайно. Судьба приводит нас к тем людям, которым суждено войти в нашу жизнь.”",
-      "“Я верю, что все совпадения случайны.”",
-      "“Судьба не существует. Следуя ей ты никогда не встретишь человека, которому суждено войти в твою жизнь.”",
-      "“Неважно, с какими препятствиями мы стакнемся, наша надежда будет вести нас.”"
+      "\"I believe that everything happens for a reason. Destiny brings us to the people who are meant to enter our lives.\"",
+      "\"I believe that all coincidences are random.\"",
+      "\"Destiny doesn't exist. Following it will never bring someone into your life.\"",
+      "\"No matter what obstacles we face, our hope will guide us.\""
     ],
-    "correct_answer": "“Я верю, что все происходит не случайно. Судьба приводит нас к тем людям, которым суждено войти в нашу жизнь.”"
+    "correct_answer": "\"I believe that everything happens for a reason. Destiny brings us to the people who are meant to enter our lives.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Шоу Трумана»?",
+    "question": "Which quote was spoken in the movie:\n\"The Truman Show\"?",
     "answers": [
-      "“Жить — это умирать медленно.”",
-      "“Жить — это быть в настоящем моменте.”",
-      "“Воспоминания не имеют значения.”",
-      "“Жизнь — это дар, который мы должны ценить.”"
+      "\"To live is to die slowly.\"",
+      "\"To live is to be in the present moment.\"",
+      "\"Memories are meaningless.\"",
+      "\"Life is a gift that we must cherish.\""
     ],
-    "correct_answer": "“Жить — это умирать медленно.”"
+    "correct_answer": "\"To live is to die slowly.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Голос улиц»?",
+    "question": "Which quote was spoken in the movie:\n\"A Bronx Tale\"?",
     "answers": [
-      "“Прощение ничего не меняет. Просто будь собой”",
-      "“Чтобы быть счастливым, тебе не нужно чье-то прощение”",
-      "“Прощать — это слабость.”",
-      "“Ты никогда не сможешь по-настоящему быть собой, пока не простишь себя.”"
+      "\"Forgiveness changes nothing. Just be yourself.\"",
+      "\"To be happy, you don't need anyone's forgiveness.\"",
+      "\"Forgiveness is weakness.\"",
+      "\"You can never truly be yourself until you forgive yourself.\""
     ],
-    "correct_answer": "“Ты никогда не сможешь по-настоящему быть собой, пока не простишь себя.”"
+    "correct_answer": "\"You can never truly be yourself until you forgive yourself.\""
   },
   {
-    "question": "Какая цитата была произнесена в фильме:\n«Миссия невыполнима»?",
+    "question": "Which quote was spoken in the movie:\n\"Mission: Impossible\"?",
     "answers": [
-      "“В жизни есть много невозможных вещей.”",
-      "“Невозможность — это реальность.”",
-      "“Невозможно просто временная иллюзия.”",
-      "“Иллюзии не имеют значения.”"
+      "\"In life, there are many impossible things.\"",
+      "\"Impossibility is reality.\"",
+      "\"Impossible is just a temporary illusion.\"",
+      "\"Illusions don't matter.\""
     ],
-    "correct_answer": "“Невозможно просто временная иллюзия.”"
+    "correct_answer": "\"Impossible is just a temporary illusion.\""
   }
 ]

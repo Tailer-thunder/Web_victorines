@@ -248,7 +248,15 @@ def quiz_question():
     questions = quizzes_manager.get_quiz_questions(quiz_id)
 
     if request.method == 'POST':
-        selected_answer = request.form['answer']
+        selected_answer = request.form.get(
+            'answer')  # Используем get() для получения параметра, чтобы избежать KeyError
+        if not selected_answer:  # Если ответ не выбран, переходим к следующему вопросу
+            next_question_number = question_number + 1
+            if next_question_number <= len(questions):
+                return redirect(url_for('quiz_question', quiz_id=quiz_id, question_number=next_question_number))
+            else:
+                return redirect(url_for('quiz_results'))
+
         question = questions[question_number - 1]
         if selected_answer == question['correct_answer']:
             session.setdefault('num_correct', 0)
@@ -262,6 +270,7 @@ def quiz_question():
             return redirect(url_for('quiz_question', quiz_id=quiz_id, question_number=next_question_number))
         else:
             return redirect(url_for('quiz_results'))
+
     question = questions[question_number - 1]
     return render_template('question.html', quiz_id=quiz_id, question_number=question_number,
                            question=question['question'], answers=question['answers'])
