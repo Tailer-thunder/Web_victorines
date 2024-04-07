@@ -1,0 +1,102 @@
+[
+  {
+    "question": "What is the name of the main character in the TV series 'Breaking Bad'?",
+    "answers": [
+      "Walter White",
+      "Jesse Pinkman",
+      "Saul Goodman",
+      "Mike Ehrmantraut"
+    ],
+    "correct_answer": "Walter White"
+  },
+  {
+    "question": "In which city do the main events of the series take place?",
+    "answers": [
+      "Chicago",
+      "Los Angeles",
+      "Albuquerque",
+      "Miami"
+    ],
+    "correct_answer": "Albuquerque"
+  },
+  {
+    "question": "Which character is a lawyer and private investigator?",
+    "answers": [
+      "Skyler White",
+      "Saul Goodman",
+      "Mike Ehrmantraut",
+      "Gus Fring"
+    ],
+    "correct_answer": "Saul Goodman"
+  },
+  {
+    "question": "Who is the partner of Walter White in the methamphetamine business?",
+    "answers": [
+      "Jesse Pinkman",
+      "Hank Schrader",
+      "Walter Jr.",
+      "Skyler White"
+    ],
+    "correct_answer": "Jesse Pinkman"
+  },
+  {
+    "question": "What is the nickname of Walter White's methamphetamine?",
+    "answers": [
+      "Blue Crystal",
+      "Green Lantern",
+      "Pink Panther",
+      "White Lightning"
+    ],
+    "correct_answer": "Blue Crystal"
+  },
+  {
+    "question": "Who is the owner of the Los Pollos Hermanos restaurant chain?",
+    "answers": [
+      "Walter White",
+      "Jesse Pinkman",
+      "Saul Goodman",
+      "Gustavo Fring"
+    ],
+    "correct_answer": "Gustavo Fring"
+  },
+  {
+    "question": "What is the profession of Walter White before he starts cooking meth?",
+    "answers": [
+      "High school chemistry teacher",
+      "Lawyer",
+      "Car mechanic",
+      "Police officer"
+    ],
+    "correct_answer": "High school chemistry teacher"
+  },
+  {
+    "question": "What is the name of Walter White's brother-in-law who works for the DEA?",
+    "answers": [
+      "Hank Schrader",
+      "Ted Beneke",
+      "Tuco Salamanca",
+      "Mike Ehrmantraut"
+    ],
+    "correct_answer": "Hank Schrader"
+  },
+  {
+    "question": "Who is the distributor of the blue meth in the later seasons?",
+    "answers": [
+      "Gus Fring",
+      "Tuco Salamanca",
+      "Hector Salamanca",
+      "Jack Welker"
+    ],
+    "correct_answer": "Gus Fring"
+  },
+  {
+    "question": "What is the name of the spin-off prequel series to 'Breaking Bad' featuring Saul Goodman?",
+    "answers": [
+      "Better Call Saul",
+      "The Saul Show",
+      "Legal Eagle",
+      "Goodman's Gambit"
+    ],
+    "correct_answer": "Better Call Saul"
+  }
+]

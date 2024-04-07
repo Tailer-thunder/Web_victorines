@@ -1,0 +1,102 @@
+[
+  {
+    "question": "What is the name of the main character in the TV series 'House'?",
+    "answers": [
+      "Gregory House",
+      "James Wilson",
+      "Lisa Cuddy",
+      "Robert Chase"
+    ],
+    "correct_answer": "Gregory House"
+  },
+  {
+    "question": "What is Dr. House's specialty in medicine?",
+    "answers": [
+      "Oncology",
+      "Diagnostic Medicine",
+      "Neurology",
+      "Cardiology"
+    ],
+    "correct_answer": "Diagnostic Medicine"
+  },
+  {
+    "question": "Who is Dr. House's best friend and colleague?",
+    "answers": [
+      "Lisa Cuddy",
+      "James Wilson",
+      "Allison Cameron",
+      "Eric Foreman"
+    ],
+    "correct_answer": "James Wilson"
+  },
+  {
+    "question": "What is the name of Dr. House's team of diagnosticians?",
+    "answers": [
+      "Surgical Team",
+      "Diagnostic Team",
+      "Emergency Team",
+      "Therapy Team"
+    ],
+    "correct_answer": "Diagnostic Team"
+  },
+  {
+    "question": "What is Dr. House's favorite catchphrase?",
+    "answers": [
+      "Everybody lies",
+      "Life is pain",
+      "No pain, no gain",
+      "Pain is temporary"
+    ],
+    "correct_answer": "Everybody lies"
+  },
+  {
+    "question": "What is the name of the hospital where Dr. House works?",
+    "answers": [
+      "Mayfield Psychiatric Hospital",
+      "Seattle Grace Hospital",
+      "Princeton-Plainsboro Teaching Hospital",
+      "New Jersey General Hospital"
+    ],
+    "correct_answer": "Princeton-Plainsboro Teaching Hospital"
+  },
+  {
+    "question": "What is Dr. House's addiction?",
+    "answers": [
+      "Cocaine",
+      "Morphine",
+      "Vicodin",
+      "Heroin"
+    ],
+    "correct_answer": "Vicodin"
+  },
+  {
+    "question": "Who is Dr. House's boss at the hospital?",
+    "answers": [
+      "James Wilson",
+      "Allison Cameron",
+      "Eric Foreman",
+      "Lisa Cuddy"
+    ],
+    "correct_answer": "Lisa Cuddy"
+  },
+  {
+    "question": "What is the nickname given to Dr. House by his team?",
+    "answers": [
+      "House",
+      "Boss",
+      "Doc",
+      "Greg"
+    ],
+    "correct_answer": "House"
+  },
+  {
+    "question": "What is Dr. House's first name?",
+    "answers": [
+      "John",
+      "Robert",
+      "Gregory",
+      "David"
+    ],
+    "correct_answer": "Gregory"
+  }
+]

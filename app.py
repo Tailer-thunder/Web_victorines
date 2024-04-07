@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -9,11 +9,13 @@ app.secret_key = 'your_secret_key'
 
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,45 +25,135 @@ class Question(db.Model):
     wrong_answer2 = db.Column(db.String(100), nullable=False)
     wrong_answer3 = db.Column(db.String(100), nullable=False)
 
-from flask import jsonify, request
+
+class QuizzesManager:
+    """
+    Менеджер для работы с викторинами
+    Методы:
+        Инициализация: QuizzesManager('<path_to_directory>')
+            (Инициализирует менеджер,
+            кэширует множество ID всех викторин и словарь названий викторин,
+            создает файл с именами викторин, если его не существует)
+        Получение множества ID всех викторин: get_quizzes_set() -> frozenset
+        Проверка существования викторины: check_for_existence(<quiz_id>: int) -> bool
+        Получение названия викторины: get_quiz_name(<quiz_id>: int)
+            (Возвращает название викторины если викторина существует,
+            иначе вызывает исключение ValueError)
+        Получение вопросов из викторины: get_quiz_questions(<quiz_id>: int)
+            (Возвращает список вопросов если викторина существует,
+            иначе вызывает исключение ValueError)
+        Добавление викторины: add_quiz('<quiz_name>', <questions_list>)
+            (<questions_list> должен быть списком, пригодным для записи в json файл)
+        Удаление викторины: remove_quiz(<quiz_id>: int)
+            (Удаляет викторину если викторина существует,
+            иначе вызывает исключение ValueError)
+    """
+
+    def __id_to_path(self, quiz_id):
+        return self.directory + "/" + str(quiz_id) + ".json"
+
+    def __find_free_id(self):
+        id_candidate = 1
+        while id_candidate in self.quizzes_set:
+            id_candidate += 1
+        return id_candidate
+
+    def __init__(self, path_to_directory: str):
+        from os import remove, listdir, path
+        from json import load, dump
+        self.__remove = remove
+        self.__load, self.__dump = load, dump
+        self.directory = path_to_directory
+        quizzes_names_file_path = self.directory + "/names.json"
+
+        # Кэширование множества ID всех викторин
+        self.quizzes_set = frozenset(
+            int(j) for j in (i.split(".json")[0] for i in listdir(self.directory) if ".json" in i) if j.isdigit())
+
+        # Проверка наличия файла с именами викторин
+        if not path.exists(quizzes_names_file_path):
+            # Инициализация пустого кэша
+            self.quizzes_names = dict()
+            # Создание файла с именами викторин
+            with open(quizzes_names_file_path, encoding="utf-8", mode="w") as quizzes_names_file:
+                self.__dump(self.quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
+        else:
+            # Кэширование словаря названий викторин, с помощью информации из файла с именами
+            with open(quizzes_names_file_path, encoding="utf-8", mode="r") as quizzes_names_file:
+                self.quizzes_names = self.__load(quizzes_names_file)
+
+    def get_quizzes_set(self) -> frozenset:
+        return self.quizzes_set
+
+    def check_for_existence(self, quiz_id: int) -> bool:
+        return quiz_id in self.quizzes_set
+
+    def get_quiz_name(self, quiz_id: int):
+        if quiz_id in self.quizzes_set:
+            if str(quiz_id) in self.quizzes_names:
+                return self.quizzes_names[str(quiz_id)]
+            raise RuntimeError(f"cannot find the name of the quiz with id=={quiz_id}")
+        raise ValueError(f"the quiz with id=={quiz_id} does not exist")
+
+    def get_quiz_questions(self, quiz_id: int):
+        if quiz_id in self.quizzes_set:
+            with open(self.__id_to_path(quiz_id), encoding="utf-8", mode="r") as questions_file:
+                quiz = self.__load(questions_file)
+            return quiz
+        raise ValueError(f"the quiz with id=={quiz_id} does not exist")
+
+    def add_quiz(self, quiz_name, questions_list):
+        quiz_id = self.__find_free_id()  # Поиск свободного ID для новой викторины
+        self.quizzes_names[str(quiz_name)] = quiz_id  # Добавление нового имени в словарь имен викторин
+
+        # Добавление нового ID в множество ID всех викторин
+        new_quizzes_set = set(self.quizzes_set)
+        new_quizzes_set.add(quiz_id)
+        self.quizzes_set = frozenset(new_quizzes_set)
+
+        # Добавление нового имени в файл с именами викторин
+        with open(self.directory + "/names.json", encoding="utf-8", mode="rw") as quizzes_names_file:
+            new_quizzes_names = self.__load(quizzes_names_file)
+            new_quizzes_names[str(quiz_id)] = quiz_name
+            self.__dump(new_quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
+        # Добавление нового файла с вопросами новой викторины
+        with open(self.__id_to_path(quiz_id), encoding="utf-8", mode="w") as questions_file:
+            self.__dump(questions_list, questions_file, ensure_ascii=False, indent=2)
+
+    def remove_quiz(self, quiz_id: int):
+        # Проверка существования викторины
+        if quiz_id in self.quizzes_set:
+
+            # Удаление ID из множества ID всех викторин
+            new_quizzes_set = set(self.quizzes_set)
+            new_quizzes_set.remove(quiz_id)
+            self.quizzes_set = frozenset(new_quizzes_set)
+
+            del self.quizzes_names[str(quiz_id)]  # Удаление имени из словаря с именами викторин
+            self.__remove(self.__id_to_path(quiz_id))  # Удаление файла с вопросами викторины
+
+            # Удаление имени из файла с именами викторин
+            with open(self.directory + "/names.json", encoding="utf-8", mode="rw") as quizzes_names_file:
+                new_quizzes_names = self.__load(quizzes_names_file)
+                del new_quizzes_names[str(quiz_id)]
+                self.__dump(new_quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
+        else:
+            raise ValueError(f"the quiz with id=={quiz_id} does not exist")
+
 
 @app.route('/get_time_left', methods=['GET'])
 def get_time_left():
     time_left = "10:00"
     return jsonify({'time_left': time_left})
-def get_questions_for_quiz(quiz_id):
-    if quiz_id.lower() == 'breaking_bad':
-        return [
-            {"question": "What is the name of the main character in the TV series 'Breaking Bad'?", "answers": ["Walter White", "Jesse Pinkman", "Saul Goodman", "Mike Ehrmantraut"], "correct_answer": "Walter White"},
-            {"question": "In which city do the main events of the series take place?", "answers": ["Chicago", "Los Angeles", "Albuquerque", "Miami"], "correct_answer": "Albuquerque"},
-            {"question": "Which character is a lawyer and private investigator?", "answers": ["Skyler White", "Saul Goodman", "Mike Ehrmantraut", "Gus Fring"], "correct_answer": "Saul Goodman"},
-            {"question": "Who is the partner of Walter White in the methamphetamine business?", "answers": ["Jesse Pinkman", "Hank Schrader", "Walter Jr.", "Skyler White"], "correct_answer": "Jesse Pinkman"},
-            {"question": "What is the nickname of Walter White's methamphetamine?", "answers": ["Blue Crystal", "Green Lantern", "Pink Panther", "White Lightning"], "correct_answer": "Blue Crystal"},
-            {"question": "Who is the owner of the Los Pollos Hermanos restaurant chain?", "answers": ["Walter White", "Jesse Pinkman", "Saul Goodman", "Gustavo Fring"], "correct_answer": "Gustavo Fring"},
-            {"question": "What is the profession of Walter White before he starts cooking meth?", "answers": ["High school chemistry teacher", "Lawyer", "Car mechanic", "Police officer"], "correct_answer": "High school chemistry teacher"},
-            {"question": "What is the name of Walter White's brother-in-law who works for the DEA?", "answers": ["Hank Schrader", "Ted Beneke", "Tuco Salamanca", "Mike Ehrmantraut"], "correct_answer": "Hank Schrader"},
-            {"question": "Who is the distributor of the blue meth in the later seasons?", "answers": ["Gus Fring", "Tuco Salamanca", "Hector Salamanca", "Jack Welker"], "correct_answer": "Gus Fring"},
-            {"question": "What is the name of the spin-off prequel series to 'Breaking Bad' featuring Saul Goodman?", "answers": ["Better Call Saul", "The Saul Show", "Legal Eagle", "Goodman's Gambit"], "correct_answer": "Better Call Saul"}
-        ]
-    elif quiz_id.lower() == 'house':
-        return [
-            {"question": "What is the name of the main character in the TV series 'House'?", "answers": ["Gregory House", "James Wilson", "Lisa Cuddy", "Robert Chase"], "correct_answer": "Gregory House"},
-            {"question": "What is Dr. House's specialty in medicine?", "answers": ["Oncology", "Diagnostic Medicine", "Neurology", "Cardiology"], "correct_answer": "Diagnostic Medicine"},
-            {"question": "Who is Dr. House's best friend and colleague?", "answers": ["Lisa Cuddy", "James Wilson", "Allison Cameron", "Eric Foreman"], "correct_answer": "James Wilson"},
-            {"question": "What is the name of Dr. House's team of diagnosticians?", "answers": ["Surgical Team", "Diagnostic Team", "Emergency Team", "Therapy Team"], "correct_answer": "Diagnostic Team"},
-            {"question": "What is Dr. House's favorite catchphrase?", "answers": ["Everybody lies", "Life is pain", "No pain, no gain", "Pain is temporary"], "correct_answer": "Everybody lies"},
-            {"question": "What is the name of the hospital where Dr. House works?", "answers": ["Mayfield Psychiatric Hospital", "Seattle Grace Hospital", "Princeton-Plainsboro Teaching Hospital", "New Jersey General Hospital"], "correct_answer": "Princeton-Plainsboro Teaching Hospital"},
-            {"question": "What is Dr. House's addiction?", "answers": ["Cocaine", "Morphine", "Vicodin", "Heroin"], "correct_answer": "Vicodin"},
-            {"question": "Who is Dr. House's boss at the hospital?", "answers": ["James Wilson", "Allison Cameron", "Eric Foreman", "Lisa Cuddy"], "correct_answer": "Lisa Cuddy"},
-            {"question": "What is the nickname given to Dr. House by his team?", "answers": ["House", "Boss", "Doc", "Greg"], "correct_answer": "House"},
-            {"question": "What is Dr. House's first name?", "answers": ["John", "Robert", "Gregory", "David"], "correct_answer": "Gregory"}
-        ]
-    else:
-        return None
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    param = {
+        'is_authorized': 'user_id' in session
+    }
+    return render_template('index.html', **param)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -87,6 +179,7 @@ def register():
 
     return render_template('register.html')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -104,12 +197,27 @@ def login():
                 flash('Incorrect username or password. Please try again.', 'error')
         else:
             flash('Incorrect username or password. Please try again.', 'error')
-
+    if 'user_id' in session:
+        return redirect('/quiz_selection')
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    if 'user_id' in session:
+        del session['user_id']
+    return redirect('/')
+
 
 @app.route('/quiz_selection')
 def quiz_selection():
-    return render_template('quiz_selection.html')
+    if 'user_id' not in session:
+        return redirect('/')
+    param = {
+        'quizzes_manager': quizzes_manager
+    }
+    return render_template('quiz_selection.html', **param)
+
 
 @app.route('/start_quiz/<quiz_id>')
 def start_quiz(quiz_id):
@@ -119,16 +227,23 @@ def start_quiz(quiz_id):
     else:
         return "Invalid quiz"
 
-@app.route('/quiz/<quiz_id>/<int:question_number>', methods=['GET', 'POST'])
-def quiz_question(quiz_id, question_number):
+
+@app.route('/quiz', methods=['GET', 'POST'])
+def quiz_question():
+    # Get params
+    quiz_id = int(request.args.get("quiz_id"))
+    question_number = int(request.args.get("question_number"))
+
+    session['quiz_id'] = quiz_id
+
     # Check if the user is logged in
     if 'user_id' not in session:
         flash('Please log in to access the quiz.', 'error')
         return redirect(url_for('login'))
 
-    questions = get_questions_for_quiz(quiz_id)
-    if questions is None:
+    if not quizzes_manager.check_for_existence(quiz_id):
         return "Invalid quiz"
+    questions = quizzes_manager.get_quiz_questions(quiz_id)
 
     if request.method == 'POST':
         selected_answer = request.form['answer']
@@ -145,9 +260,9 @@ def quiz_question(quiz_id, question_number):
             return redirect(url_for('quiz_question', quiz_id=quiz_id, question_number=next_question_number))
         else:
             return redirect(url_for('quiz_results'))
-
     question = questions[question_number - 1]
-    return render_template('question.html', quiz_id=quiz_id, question_number=question_number, question=question['question'], answers=question['answers'])
+    return render_template('question.html', quiz_id=quiz_id, question_number=question_number,
+                           question=question['question'], answers=question['answers'])
 
 
 @app.route('/quiz_results')
@@ -157,7 +272,7 @@ def quiz_results():
     total_questions = 0
     if 'quiz_id' in session:
         quiz_id = session['quiz_id']
-        questions = get_questions_for_quiz(quiz_id)
+        questions = quizzes_manager.get_quiz_questions(int(quiz_id))
         if questions is not None:
             total_questions = len(questions)
 
@@ -168,4 +283,5 @@ def quiz_results():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+    quizzes_manager = QuizzesManager('./quizzes')
     app.run(debug=True)
