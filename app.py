@@ -145,7 +145,7 @@ class QuizzesManager:
 
 @app.route('/get_time_left', methods=['GET'])
 def get_time_left():
-    time_left = "10:00"
+    time_left = "01:00"  # Оставляем 1 минуту на каждый вопрос
     return jsonify({'time_left': time_left})
 
 
