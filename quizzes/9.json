@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Who wrote the novel 'Crime and Punishment'?",
+    "answers": [
+      "Fyodor Dostoevsky",
+      "Leo Tolstoy",
+      "Ivan Turgenev",
+      "Alexander Pushkin"
+    ],
+    "correct_answer": "Fyodor Dostoevsky",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "What year was Leo Tolstoy's War and Peace published?",
+    "answers": [
+      "1869",
+      "1872",
+      "1867",
+      "1878"
+    ],
+    "correct_answer": "1869",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "What is the name of the chronicle novel by Gabriel García Márquez?",
+    "answers": [
+      "Odyssey",
+      "War and Peace",
+      "One Hundred Years of Solitude",
+      "The Brothers Karamazov"
+    ],
+    "correct_answer": "One Hundred Years of Solitude",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "Who is the main character of the novel 'The Master and Margarita' by Mikhail Bulgakov?",
+    "answers": [
+      "Professor",
+      "Artist",
+      "Writer",
+      "Devil"
+    ],
+    "correct_answer": "Devil",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "Who wrote the story 'Alice in Wonderland'?",
+    "answers": [
+      "Jonathan Swift",
+      "Lewis Carroll",
+      "Oscar Wilde",
+      "Charles Dickens"
+    ],
+    "correct_answer": "Lewis Carroll",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "What is the name of George Orwell's dystopian novel?",
+    "answers": [
+      "1984",
+      "Roasted Orange",
+      "Gone with the Wind",
+      "The One Who Runs the Maze"
+    ],
+    "correct_answer": "1984",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "Who is the author of the novel 'Harry Potter and the Philosopher's Stone'?",
+    "answers": [
+      "John R. R. Tolkien",
+      "JK Rowling",
+      "George R. R. Martin",
+      "Suzanne Collins"
+    ],
+    "correct_answer": "JK Rowling",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "Which work of Jules Verne was the first in the 'Mysterious Island' cycle?",
+    "answers": [
+      "Twenty Thousand Leagues Under the Sea",
+      "Earth on the Moon",
+      "Robinson Crusoe",
+      "Five Weeks in a Balloon"
+    ],
+    "correct_answer": "Twenty Thousand Leagues Under the Sea",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "What was the name of the count in the novel 'Monte Cristo' by Alexandre Dumas?",
+    "answers": [
+      "Count Rochefort",
+      "Count de Leon",
+      "Count Argon",
+      "Count Edmond"
+    ],
+    "correct_answer": "Count Edmond",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  },
+  {
+    "question": "What is the name of Nellie Bly's autobiographical book about life in Dark Matter?",
+    "answers": [
+      "Caught Moon",
+      "Ships in the Desert",
+      "Early Mornings",
+      "Hands of Sand"
+    ],
+    "correct_answer": "Ships in the Desert",
+    "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"
+  }
+]

@@ -17,13 +17,21 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2 class="text-center">Home</h2>
-        <p class="text-center">Welcome to the Quiz App!</p>
-        <div class="text-center">
-            <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
-            <a href="{{ url_for('register') }}" class="btn btn-success">Register</a>
-        </div>
+<div class="container">
+    <h2 class="text-center">Home</h2>
+    <p class="text-center">Welcome to the Quiz App!</p>
+    {% if is_authorized %}
+    <p class="text-center">You are already authorized</p>
+    <div class="text-center">
+        <a href="{{ url_for('quiz_selection') }}" class="btn btn-secondary">Select quiz</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
     </div>
+    {% else %}
+    <div class="text-center">
+        <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn-success">Register</a>
+        {% endif %}
+    </div>
+</div>
 </body>
 </html>

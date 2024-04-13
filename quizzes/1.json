@@ -1,0 +1,134 @@
+[
+  {
+    "question": "What is the name of the main character in the TV series 'Breaking Bad'?",
+    "answers": [
+      "Walter White",
+      "Jesse Pinkman",
+      "Saul Goodman",
+      "Mike Ehrmantraut"
+    ],
+    "correct_answer": "Walter White",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "In which city do the main events of the series take place?",
+    "answers": [
+      "Chicago",
+      "Los Angeles",
+      "Albuquerque",
+      "Miami"
+    ],
+    "correct_answer": "Albuquerque",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "Which character is a lawyer and private investigator?",
+    "answers": [
+      "Skyler White",
+      "Saul Goodman",
+      "Mike Ehrmantraut",
+      "Gus Fring"
+    ],
+    "correct_answer": "Saul Goodman",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "Who is shown in the picture?",
+    "answers": [
+      "Kimberly Wexler",
+      "Lydia Rodarte-Quayle",
+      "Marie Schrader",
+      "Skyler White"
+    ],
+    "correct_answer": "Skyler White",
+    "image": "https://i.postimg.cc/NjtwnV4s/Ski.jpg"
+  },
+  {
+    "question": "Who is the partner of Walter White in the methamphetamine business?",
+    "answers": [
+      "Jesse Pinkman",
+      "Hank Schrader",
+      "Walter Jr.",
+      "Skyler White"
+    ],
+    "correct_answer": "Jesse Pinkman",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "What is the nickname of Walter White's methamphetamine?",
+    "answers": [
+      "Blue Crystal",
+      "Green Lantern",
+      "Pink Panther",
+      "White Lightning"
+    ],
+    "correct_answer": "Blue Crystal",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "Who is the owner of the Los Pollos Hermanos restaurant chain?",
+    "answers": [
+      "Walter White",
+      "Jesse Pinkman",
+      "Saul Goodman",
+      "Gustavo Fring"
+    ],
+    "correct_answer": "Gustavo Fring",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "What is the profession of Walter White before he starts cooking meth?",
+    "answers": [
+      "High school chemistry teacher",
+      "Lawyer",
+      "Car mechanic",
+      "Police officer"
+    ],
+    "correct_answer": "High school chemistry teacher",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "What is the name of Walter White's brother-in-law who works for the DEA?",
+    "answers": [
+      "Hank Schrader",
+      "Ted Beneke",
+      "Tuco Salamanca",
+      "Mike Ehrmantraut"
+    ],
+    "correct_answer": "Hank Schrader",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "Who is the distributor of the blue meth in the later seasons?",
+    "answers": [
+      "Gus Fring",
+      "Tuco Salamanca",
+      "Hector Salamanca",
+      "Jack Welker"
+    ],
+    "correct_answer": "Gus Fring",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  },
+  {
+    "question": "What kind of place is shown in the picture?",
+    "answers": [
+      "Saul Goodman’s office",
+      "Skyler’s lawyer’s office",
+      "GERTRUDE ZACHARY JEWELRY",
+      "The Crystal Palace"
+    ],
+    "correct_answer": "Skyler’s lawyer’s office",
+    "image": "https://i.postimg.cc/zX09dBVj/offic.jpg"
+  },
+  {
+    "question": "What is the name of the spin-off prequel series to 'Breaking Bad' featuring Saul Goodman?",
+    "answers": [
+      "Better Call Saul",
+      "The Saul Show",
+      "Legal Eagle",
+      "Goodman's Gambit"
+    ],
+    "correct_answer": "Better Call Saul",
+    "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"
+  }
+]

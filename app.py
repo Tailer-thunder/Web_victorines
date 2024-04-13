@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -9,11 +9,13 @@ app.secret_key = 'your_secret_key'
 
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -23,97 +25,137 @@ class Question(db.Model):
     wrong_answer2 = db.Column(db.String(100), nullable=False)
     wrong_answer3 = db.Column(db.String(100), nullable=False)
 
-from flask import jsonify, request
+
+class QuizzesManager:
+    """
+    Менеджер для работы с викторинами
+    Методы:
+        Инициализация: QuizzesManager('<path_to_directory>')
+            (Инициализирует менеджер,
+            кэширует множество ID всех викторин и словарь названий викторин,
+            создает файл с именами викторин, если его не существует)
+        Получение множества ID всех викторин: get_quizzes_set() -> frozenset
+        Проверка существования викторины: check_for_existence(<quiz_id>: int) -> bool
+        Получение названия викторины: get_quiz_name(<quiz_id>: int)
+            (Возвращает название викторины если викторина существует,
+            иначе вызывает исключение ValueError)
+        Получение вопросов из викторины: get_quiz_questions(<quiz_id>: int)
+            (Возвращает список вопросов если викторина существует,
+            иначе вызывает исключение ValueError)
+        Добавление викторины: add_quiz('<quiz_name>', <questions_list>)
+            (<questions_list> должен быть списком, пригодным для записи в json файл)
+        Удаление викторины: remove_quiz(<quiz_id>: int)
+            (Удаляет викторину если викторина существует,
+            иначе вызывает исключение ValueError)
+    """
+
+    def __id_to_path(self, quiz_id):
+        return self.directory + "/" + str(quiz_id) + ".json"
+
+    def __find_free_id(self):
+        id_candidate = 1
+        while id_candidate in self.quizzes_set:
+            id_candidate += 1
+        return id_candidate
+
+    def __init__(self, path_to_directory: str):
+        from os import remove, listdir, path
+        from json import load, dump
+        self.__remove = remove
+        self.__load, self.__dump = load, dump
+        self.directory = path_to_directory
+        quizzes_names_file_path = self.directory + "/names.json"
+
+        # Кэширование множества ID всех викторин
+        self.quizzes_set = frozenset(
+            int(j) for j in (i.split(".json")[0] for i in listdir(self.directory) if ".json" in i) if j.isdigit())
+
+        # Проверка наличия файла с именами викторин
+        if not path.exists(quizzes_names_file_path):
+            # Инициализация пустого кэша
+            self.quizzes_names = dict()
+            # Создание файла с именами викторин
+            with open(quizzes_names_file_path, encoding="utf-8", mode="w") as quizzes_names_file:
+                self.__dump(self.quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
+        else:
+            # Кэширование словаря названий викторин, с помощью информации из файла с именами
+            with open(quizzes_names_file_path, encoding="utf-8", mode="r") as quizzes_names_file:
+                self.quizzes_names = self.__load(quizzes_names_file)
+
+    def get_quizzes_set(self) -> frozenset:
+        return self.quizzes_set
+
+    def check_for_existence(self, quiz_id: int) -> bool:
+        return quiz_id in self.quizzes_set
+
+    def get_quiz_name(self, quiz_id: int):
+        if quiz_id in self.quizzes_set:
+            if str(quiz_id) in self.quizzes_names:
+                return self.quizzes_names[str(quiz_id)]
+            raise RuntimeError(f"cannot find the name of the quiz with id=={quiz_id}")
+        raise ValueError(f"the quiz with id=={quiz_id} does not exist")
+
+    def get_quiz_questions(self, quiz_id: int):
+        if quiz_id in self.quizzes_set:
+            with open(self.__id_to_path(quiz_id), encoding="utf-8", mode="r") as questions_file:
+                quiz = self.__load(questions_file)
+            return quiz
+        raise ValueError(f"the quiz with id=={quiz_id} does not exist")
+
+    def add_quiz(self, quiz_name, questions_list):
+        quiz_id = self.__find_free_id()  # Поиск свободного ID для новой викторины
+        self.quizzes_names[str(quiz_name)] = quiz_id  # Добавление нового имени в словарь имен викторин
+
+        # Добавление нового ID в множество ID всех викторин
+        new_quizzes_set = set(self.quizzes_set)
+        new_quizzes_set.add(quiz_id)
+        self.quizzes_set = frozenset(new_quizzes_set)
+
+        # Добавление нового имени в файл с именами викторин
+        with open(self.directory + "/names.json", encoding="utf-8", mode="r") as quizzes_names_file:
+            new_quizzes_names = self.__load(quizzes_names_file)
+        new_quizzes_names[str(quiz_id)] = quiz_name
+        with open(self.directory + "/names.json", encoding="utf-8", mode="w") as quizzes_names_file:
+            self.__dump(new_quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
+        # Добавление нового файла с вопросами новой викторины
+        with open(self.__id_to_path(quiz_id), encoding="utf-8", mode="w") as questions_file:
+            self.__dump(questions_list, questions_file, ensure_ascii=False, indent=2)
+
+    def remove_quiz(self, quiz_id: int):
+        # Проверка существования викторины
+        if quiz_id in self.quizzes_set:
+
+            # Удаление ID из множества ID всех викторин
+            new_quizzes_set = set(self.quizzes_set)
+            new_quizzes_set.remove(quiz_id)
+            self.quizzes_set = frozenset(new_quizzes_set)
+
+            del self.quizzes_names[str(quiz_id)]  # Удаление имени из словаря с именами викторин
+            self.__remove(self.__id_to_path(quiz_id))  # Удаление файла с вопросами викторины
+
+            # Удаление имени из файла с именами викторин
+            with open(self.directory + "/names.json", encoding="utf-8", mode="r") as quizzes_names_file:
+                new_quizzes_names = self.__load(quizzes_names_file)
+            del new_quizzes_names[str(quiz_id)]
+            with open(self.directory + "/names.json", encoding="utf-8", mode="w") as quizzes_names_file:
+                self.__dump(new_quizzes_names, quizzes_names_file, ensure_ascii=False, indent=2)
+        else:
+            raise ValueError(f"the quiz with id=={quiz_id} does not exist")
+
 
 @app.route('/get_time_left', methods=['GET'])
 def get_time_left():
-    time_left = "10:00"
+    time_left = "01:00"  # Оставляем 1 минуту на каждый вопрос
     return jsonify({'time_left': time_left})
-def get_questions_for_quiz(quiz_id):
-    if quiz_id.lower() == 'breaking_bad':
-        return [
-            {"question": "What is the name of the main character in the TV series 'Breaking Bad'?", "answers": ["Walter White", "Jesse Pinkman", "Saul Goodman", "Mike Ehrmantraut"], "correct_answer": "Walter White", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "In which city do the main events of the series take place?", "answers": ["Chicago", "Los Angeles", "Albuquerque", "Miami"], "correct_answer": "Albuquerque", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "Which character is a lawyer and private investigator?", "answers": ["Skyler White", "Saul Goodman", "Mike Ehrmantraut", "Gus Fring"], "correct_answer": "Saul Goodman", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "Who is the partner of Walter White in the methamphetamine business?", "answers": ["Jesse Pinkman", "Hank Schrader", "Walter Jr.", "Skyler White"], "correct_answer": "Jesse Pinkman", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "What is the nickname of Walter White's methamphetamine?", "answers": ["Blue Crystal", "Green Lantern", "Pink Panther", "White Lightning"], "correct_answer": "Blue Crystal", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "Who is the owner of the Los Pollos Hermanos restaurant chain?", "answers": ["Walter White", "Jesse Pinkman", "Saul Goodman", "Gustavo Fring"], "correct_answer": "Gustavo Fring", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "What is the profession of Walter White before he starts cooking meth?", "answers": ["High school chemistry teacher", "Lawyer", "Car mechanic", "Police officer"], "correct_answer": "High school chemistry teacher", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "What is the name of Walter White's brother-in-law who works for the DEA?", "answers": ["Hank Schrader", "Ted Beneke", "Tuco Salamanca", "Mike Ehrmantraut"], "correct_answer": "Hank Schrader", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "Who is the distributor of the blue meth in the later seasons?", "answers": ["Gus Fring", "Tuco Salamanca", "Hector Salamanca", "Jack Welker"], "correct_answer": "Gus Fring", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"},
-            {"question": "What is the name of the spin-off prequel series to 'Breaking Bad' featuring Saul Goodman?", "answers": ["Better Call Saul", "The Saul Show", "Legal Eagle", "Goodman's Gambit"], "correct_answer": "Better Call Saul", "image": "https://i.postimg.cc/gcyNmNmh/brba.jpg"}
-        ]
-    elif quiz_id.lower() == 'house':
-        return [
-            {"question": "What is the name of the main character in the TV series 'House'?", "answers": ["Gregory House", "James Wilson", "Lisa Cuddy", "Robert Chase"], "correct_answer": "Gregory House", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "What is Dr. House's specialty in medicine?", "answers": ["Oncology", "Diagnostic Medicine", "Neurology", "Cardiology"], "correct_answer": "Diagnostic Medicine", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "Who is Dr. House's best friend and colleague?", "answers": ["Lisa Cuddy", "James Wilson", "Allison Cameron", "Eric Foreman"], "correct_answer": "James Wilson", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "What is the name of Dr. House's team of diagnosticians?", "answers": ["Surgical Team", "Diagnostic Team", "Emergency Team", "Therapy Team"], "correct_answer": "Diagnostic Team", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "What is Dr. House's favorite catchphrase?", "answers": ["Everybody lies", "Life is pain", "No pain, no gain", "Pain is temporary"], "correct_answer": "Everybody lies", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "What is the name of the hospital where Dr. House works?", "answers": ["Mayfield Psychiatric Hospital", "Seattle Grace Hospital", "Princeton-Plainsboro Teaching Hospital", "New Jersey General Hospital"], "correct_answer": "Princeton-Plainsboro Teaching Hospital", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "What is Dr. House's addiction?", "answers": ["Cocaine", "Morphine", "Vicodin", "Heroin"], "correct_answer": "Vicodin", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "Who is Dr. House's boss at the hospital?", "answers": ["James Wilson", "Allison Cameron", "Eric Foreman", "Lisa Cuddy"], "correct_answer": "Lisa Cuddy", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "What is the nickname given to Dr. House by his team?", "answers": ["House", "Boss", "Doc", "Greg"], "correct_answer": "House", "image": "https://i.postimg.cc/P56dcWCs/House.png"},
-            {"question": "What is Dr. House's first name?", "answers": ["John", "Robert", "Gregory", "David"], "correct_answer": "Gregory", "image": "https://i.postimg.cc/P56dcWCs/House.png"}
-        ]
-    elif quiz_id.lower() == 'history and culture of japan':
-        return [
-            {"question": "What is the name of Japanese traditional clothing?", "answers": ["Hanbok", "Kimono", "Sari", "Cheongsam"], "correct_answer": "Kimono", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is sakura in Japanese culture?", "answers": ["Japanese holiday", "Geographic name", "Japanese military equipment", "Cherry blossoms"], "correct_answer": "Cherry blossoms", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is the name of the Japanese art of decorating objects with gold or silver?", "answers": ["Origami", "Ikebana", "Ukiyo-e", "Maki-e"], "correct_answer": "Maki-e", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is a samurai?", "answers": ["Japanese dance", "Japanese tea", "Japanese warrior", "Japanese dish"], "correct_answer": "Japanese warrior", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is the name of the Japanese traditional theater genre in which actors perform folk tales and legends?", "answers": ["Noh", "Kabuki", "Bunraku", "Enka"], "correct_answer": "Kabuki", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is the name of the Japanese tea ceremony?", "answers": ["Sushi", "Izakaya", "Sake", "Chado"], "correct_answer": "Chado", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "Which day is celebrated as the National Emperor's Birthday Holiday in Japan?", "answers": ["May 1st", "November 11", "February 23", "April 29"], "correct_answer": "April 29", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is the name of the classic Japanese folding knife?", "answers": ["Katana", "Wakizashi", "Tanto", "Higonokami"], "correct_answer": "Katana", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is a geisha in Japanese culture?", "answers": ["Female profession", "Japanese trampoline", "Japanese Beatles", "Japanese instrument"], "correct_answer": "Female profession", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"},
-            {"question": "What is the name of the Japanese art of arranging bouquets of fresh flowers?", "answers": ["Sumi-e", "Mizuhiki", "Ikebana", "Kintsugi"], "correct_answer": "Ikebana", "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"}
-        ]
-    elif quiz_id.lower() == 'history of cinema':
-        return [
-            {"question": "Who directed the movie 'Breakfast at Tiffany's'?", "answers": ["Stanley Kubrick", "Alfred Hitchcock", "Billy Wilder", "Blake Edwards"], "correct_answer": "Blake Edwards", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "Which film was the first color film to win the Academy Award for Best Picture?", "answers": ["The Wizard of Oz", "The Sound of Music", "Ben-Hur", "The Citadel"], "correct_answer": "The Wizard of Oz", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "Who played the main role in the movie 'The Godfather'?", "answers": ["Robert De Niro", "Al Pacino", "Marlon Brando", "Johnny Depp"], "correct_answer": "Marlon Brando", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "What is the name of the first film made by the Lumiere brothers?", "answers": ["Train arrival at La Ciotat station", "Cleaning the floor", "Breakfast", "Lumiere family"], "correct_answer": "Train arrival at La Ciotat station", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "Which film is the highest-grossing film in the history of cinema?", "answers": ["Avengers: Endgame", "Avatar", "Star Wars: The Force Awakens", "Titanic"], "correct_answer": "Titanic", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "In what year was Disney's first animated feature film released?", "answers": ["1937", "1950", "1963", "1989"], "correct_answer": "1937", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "Who made the movie 'Some Like It Hot'?", "answers": ["Francis Ford Coppola", "Stanley Donen", "Damien Chazelle", "Billy Wilder"], "correct_answer": "Stanley Donen", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "What movie starred Charlize Theron as a painfully lonely astronaut?", "answers": ["Alien", "March", "Gravity", "Oblivion"], "correct_answer": "March", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "Who played the main male role in the film 'Insomnia' (2002)?", "answers": ["Colin Farrell", "Al Pacino", "Leonardo DiCaprio", "Billy Wilder"], "correct_answer": "Al Pacino", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"},
-            {"question": "Which film brought actor Tom Hanks his first Academy Award for Best Actor?", "answers": ["Saving Private Ryan", "Forrest Gump", "The Green Mile", "Ghost"], "correct_answer": "Forrest Gump", "image": "https://i.postimg.cc/ncgk1516/cinema.jpg"}
-        ]
-    elif quiz_id.lower() == 'geography of france':
-        return [
-            {"question": "Which river flows through Paris?", "answers": ["Seine", "Rhine", "Loire", "Garonne"], "correct_answer": "Seine", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "What is the name of the highest peak in France?", "answers": ["Mont Blanc", "Elbrus", "Matterhorn", "Eiger"], "correct_answer": "Mont Blanc", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "Which city is the capital of France?", "answers": ["Marseille", "Lyon", "Toulouse", "Paris"], "correct_answer": "Paris", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "Which lake is located on the border of France and Switzerland?", "answers": ["Geneva", "Constance", "Como", "Garda"], "correct_answer": "Geneva", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "Which region of France is famous for its wineries?", "answers": ["Loire", "Alsace", "Bordeaux", "Normandy"], "correct_answer": "Bordeaux", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "Which sea washes the southern coast of France?", "answers": ["Mediterranean", "Black", "Caspian", "Azure"], "correct_answer": "Mediterranean", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "Which mountain range lies in the southeast of France?", "answers": ["Pyrenees", "Alps", "Carpathians", "Apennines"], "correct_answer": "Alps", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "What is the name of the archipelago in the Mediterranean Sea that belongs to France?", "answers": ["Corsica", "Sardinia", "Sicily", "Balearics"], "correct_answer": "Corsica", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "What is the name of the river that flows through Lyon?", "answers": ["Loire", "Seine", "Rhone", "Garonne"], "correct_answer": "Rhone", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"},
-            {"question": "What is the name of the city located on the Cote d'Azur of France?", "answers": ["Nice", "Marseille", "Cannes", "Monaco"], "correct_answer": "Nice", "image": "https://i.postimg.cc/4yr9zCTP/franch.jpg"}
-        ]
-    elif quiz_id.lower() == 'world literature':
-        return [
-            {"question": "Who wrote the novel 'Crime and Punishment'?", "answers": ["Fyodor Dostoevsky", "Leo Tolstoy", "Ivan Turgenev", "Alexander Pushkin"], "correct_answer": "Fyodor Dostoevsky", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "What year was Leo Tolstoy's War and Peace published?", "answers": ["1869", "1872", "1867", "1878"], "correct_answer": "1869", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "What is the name of the chronicle novel by Gabriel García Márquez?", "answers": ["Odyssey", "War and Peace", "One Hundred Years of Solitude", "The Brothers Karamazov"], "correct_answer": "One Hundred Years of Solitude", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "Who is the main character of the novel 'The Master and Margarita' by Mikhail Bulgakov?", "answers": ["Professor", "Artist", "Writer", "Devil"], "correct_answer": "Devil", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "Who wrote the story 'Alice in Wonderland'?", "answers": ["Jonathan Swift", "Lewis Carroll", "Oscar Wilde", "Charles Dickens"], "correct_answer": "Lewis Carroll", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "What is the name of George Orwell's dystopian novel?", "answers": ["1984", "Roasted Orange", "Gone with the Wind", "The One Who Runs the Maze"], "correct_answer": "1984", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "Who is the author of the novel 'Harry Potter and the Philosopher's Stone'?", "answers": ["John R. R. Tolkien", "JK Rowling", "George R. R. Martin", "Suzanne Collins"], "correct_answer": "JK Rowling", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "Which work of Jules Verne was the first in the 'Mysterious Island' cycle?", "answers": ["Twenty Thousand Leagues Under the Sea", "Earth on the Moon", "Robinson Crusoe", "Five Weeks in a Balloon"], "correct_answer": "Twenty Thousand Leagues Under the Sea", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "What was the name of the count in the novel 'Monte Cristo' by Alexandre Dumas?", "answers": ["Count Rochefort", "Count de Leon", "Count Argon", "Count Edmond"], "correct_answer": "Count Edmond", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"},
-            {"question": "What is the name of Nellie Bly's autobiographical book about life in Dark Matter?", "answers": ["Caught Moon", "Ships in the Desert", "Early Mornings", "Hands of Sand"], "correct_answer": "Ships in the Desert", "image": "https://i.postimg.cc/fLytpWz5/Literatyra.jpg"}
-        ]
-    else:
-        return None
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    param = {
+        'is_authorized': 'user_id' in session
+    }
+    return render_template('index.html', **param)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -139,6 +181,7 @@ def register():
 
     return render_template('register.html')
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -156,34 +199,64 @@ def login():
                 flash('Incorrect username or password. Please try again.', 'error')
         else:
             flash('Incorrect username or password. Please try again.', 'error')
-
+    if 'user_id' in session:
+        return redirect('/quiz_selection')
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    if 'user_id' in session:
+        del session['user_id']
+    return redirect('/')
+
 
 @app.route('/quiz_selection')
 def quiz_selection():
-    return render_template('quiz_selection.html')
+    if 'user_id' not in session:
+        return redirect('/')
+    param = {
+        'quizzes_manager': quizzes_manager
+    }
+    return render_template('quiz_selection.html', **param)
+
 
 @app.route('/start_quiz/<quiz_id>')
 def start_quiz(quiz_id):
-    if quiz_id.lower() == 'breaking_bad' or quiz_id.lower() == 'house' or quiz_id.lower() == 'history and culture of japan' or quiz_id.lower() == 'history of cinema' or quiz_id.lower() == 'geography of france' or quiz_id.lower() == 'world literature':
+    if quiz_id.lower() == 'breaking_bad' or quiz_id.lower() == 'house':
         session['quiz_id'] = quiz_id
         return redirect(url_for('quiz_question', quiz_id=quiz_id, question_number=1))
     else:
         return "Invalid quiz"
 
-@app.route('/quiz/<quiz_id>/<int:question_number>', methods=['GET', 'POST'])
-def quiz_question(quiz_id, question_number):
+
+@app.route('/quiz', methods=['GET', 'POST'])
+def quiz_question():
+    # Get params
+    quiz_id = int(request.args.get("quiz_id"))
+    question_number = int(request.args.get("question_number"))
+
+    session['quiz_id'] = quiz_id
+
     # Check if the user is logged in
     if 'user_id' not in session:
         flash('Please log in to access the quiz.', 'error')
         return redirect(url_for('login'))
 
-    questions = get_questions_for_quiz(quiz_id)
-    if questions is None:
+    if not quizzes_manager.check_for_existence(quiz_id):
         return "Invalid quiz"
+    questions = quizzes_manager.get_quiz_questions(quiz_id)
 
     if request.method == 'POST':
-        selected_answer = request.form['answer']
+        selected_answer = request.form.get(
+            'answer')  # Используем get() для получения параметра, чтобы избежать KeyError
+        if not selected_answer:  # Если ответ не выбран, переходим к следующему вопросу
+            next_question_number = question_number + 1
+            if next_question_number <= len(questions):
+                return redirect(url_for('quiz_question', quiz_id=quiz_id, question_number=next_question_number))
+            else:
+                return redirect(url_for('quiz_results'))
+
         question = questions[question_number - 1]
         if selected_answer == question['correct_answer']:
             session.setdefault('num_correct', 0)
@@ -199,7 +272,8 @@ def quiz_question(quiz_id, question_number):
             return redirect(url_for('quiz_results'))
 
     question = questions[question_number - 1]
-    return render_template('question.html', quiz_id=quiz_id, question_number=question_number, question=question['question'], answers=question['answers'], image=question['image'])
+    return render_template('question.html', quiz_id=quiz_id, question_number=question_number,
+                           question=question['question'], answers=question['answers'], image=question['image'])
 
 
 @app.route('/quiz_results')
@@ -209,15 +283,18 @@ def quiz_results():
     total_questions = 0
     if 'quiz_id' in session:
         quiz_id = session['quiz_id']
-        questions = get_questions_for_quiz(quiz_id)
+        questions = quizzes_manager.get_quiz_questions(int(quiz_id))
         if questions is not None:
             total_questions = len(questions)
 
     session.pop('num_correct', None)
+    if num_correct > total_questions:
+        num_correct = total_questions
     return render_template('quiz_results.html', num_correct=num_correct, total_questions=total_questions)
 
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+    quizzes_manager = QuizzesManager('./quizzes')
     app.run(debug=True)
