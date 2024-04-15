@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/base.css">
+    {% if title == indefinite %}
+    <title>Web Quizzes</title>
+    {% else %}
+    <title>{{title}} - Web Quizzes</title>
+    {% endif %}
+    {% block head %}{% endblock %}
+</head>
+<body class="base_style">
+<header>
+    {% if not is_authorized %}
+    <nav class="navbar bg-secondary">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            {% if title == 'Home' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('index') }}">Home</a>
+
+            {% if title == 'Sign in' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('signin') }}">Sign in</a>
+
+            {% if title == 'Sign up' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('signup') }}">Sign up</a>
+        </div>
+    </nav>
+    {% else %}
+    <nav class="navbar bg-secondary">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            {% if title == 'Home' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('index') }}">Home</a>
+
+            {% if title == 'Quiz selection' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('quiz_selection') }}">Select quiz</a>
+
+            {% if title == 'New quiz' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('new_quiz') }}">Create new quiz</a>
+
+            {% if title == 'My account' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('my_account') }}">My account</a>
+
+            {% if title == 'Logout' %}
+            <input type="radio" class="btn-check" checked>
+            {% else %}
+            <input type="radio" class="btn-check">
+            {% endif %}
+            <a class="btn btn-secondary navbar-button btn-lg" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+    {% endif %}
+</header>
+<!-- Begin page content -->
+{% block content %}{% endblock %}
+</body>
+</html>

@@ -1,37 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 50px;
-        }
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <h2 class="text-center">Home</h2>
-    <p class="text-center">Welcome to the Quiz App!</p>
-    {% if is_authorized %}
-    <p class="text-center">You are already authorized</p>
-    <div class="text-center">
-        <a href="{{ url_for('quiz_selection') }}" class="btn btn-secondary">Select quiz</a>
-        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
-    </div>
-    {% else %}
-    <div class="text-center">
-        <a href="{{ url_for('login') }}" class="btn btn-primary">Login</a>
-        <a href="{{ url_for('register') }}" class="btn btn-success">Register</a>
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container" style="margin-top: 50px; margin-bottom: 100px;" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
+        <h1 class="text-center">Home</h1>
+        <h3 class="text-center">Welcome to the Quiz App!</h3>
+        {% if is_authorized %}
+        <br>
+        <h4 class="text-center">You are already authorized:</h4>
+        <div align="center">
+            <a type="button" class="btn btn-success btn-lg" href="{{ url_for('quiz_selection') }}">Select quiz!</a>
+        </div>
         {% endif %}
     </div>
-</div>
-</body>
-</html>
+    </div>
+</main>
+{% endblock %}

@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Selection</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 50px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .quiz-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        .quiz-list li {
-            background-color: #fff;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .quiz-list li a {
-            text-decoration: none;
-            color: #007bff;
-        }
-    </style>
-</head>
-<body>
-<div class="text-center m-3">
-    <a href="{{ url_for('index') }}" class="btn btn-secondary">Home page</a>
-    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a></div>
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/quiz_selection.css">
+{% endblock %}
+
+{% block content %}
 <div class="container">
     <h2 class="text-center">Quiz Selection</h2>
     <ul class="quiz-list">
@@ -44,5 +15,4 @@
         {% endfor %}
     </ul>
 </div>
-</body>
-</html>
+{% endblock %}

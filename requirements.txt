@@ -1,3 +1,5 @@
-flask==3.0.2
+flask==3.0.3
 Flask-SQLAlchemy==3.1.1
 Werkzeug==3.0.2
+wtforms==3.1.2
+wtforms[email]==3.1.2
