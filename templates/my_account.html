@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block head %}
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+    </symbol>
+    <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+</svg>
+<link rel="stylesheet" href="/static/css/my_account.css">
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container" style="margin-top: 50px; margin-bottom: 100px;">
+    <section>
+        <h1 align="center">Current rating is: {{ rating }} points</h1>
+        <br><br>
+        <div class="card" style="width: 600px;">
+            <div class="card-header">
+                History of quizzes
+            </div>
+            <ul class="list-group list-group-flush">
+                {% if not quizzes_history %}
+                <li class="list-group-item">It's empty, so far...</li>
+                {% else %}
+                {% for result in quizzes_history %}
+                <li class="list-group-item">{{ result }}</li>
+                {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+    <section style="margin-top: 80px;">
+        <div>
+            <h2 align="center">{{ title }}</h2>
+            <hr size="6">
+            {% if changes_successfully_applied %}
+            <div class="alert alert-success d-flex align-items-center" role="alert"
+                 style="margin-top: 30px; margin-bottom: 30px;">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                    <use xlink:href="#check-circle-fill"/>
+                </svg>
+                <div>
+                    The changes have been successfully applied.
+                </div>
+            </div>
+            {% endif %}
+            {% if email_confirmation_required %}
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                    <use xlink:href="#exclamation-triangle-fill"/>
+                </svg>
+                <div>
+                    You have to confirm your email address.<br>Please click on the "Confirm" button.
+                    <!--You will click the "Confirm" button. -->
+                </div>
+            </div>
+            {% endif %}
+            <form action="" method="post" class="main_form">
+                <div style="margin-left: 50px; margin-right: 50px;">
+                    <div>
+                        <h4>Main information</h4>
+                        <hr size="3">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="text" name="id" class="form-control" id="id" value="{{ user_id }}" readonly/><br>
+                        <div>
+                            <label for="name" class="form-label">Full name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Full name"
+                                   value="{{ form.name.data }}" title="Enter your name." autocomplete="name"/><br>
+                            {% for error in form.name.errors %}
+                            <div class="alert alert-danger" role="alert">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in errors %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            {% if email_confirmation_required %}
+                            <label for="new_email" class="form-label">Email</label>
+                            <div class="d-flex">
+                                <input type="email" name="email" class="form-control d-inline-block" id="new_email"
+                                       placeholder="Email" value="{{ form.email.data }}"
+                                       title="Enter your email address." autocomplete="email"/><br>
+                                <a type="confirm" class="btn btn-warning d-inline-block"
+                                   href="{{ url_for('email_confirmation') }}"
+                                   title="You have to confirm your email address.">Confirm</a>
+                            </div>
+                            {% else %}
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" id="email" placeholder="Email"
+                                   value="{{ form.email.data }}" title="Enter your email address."
+                                   autocomplete="email"/><br>
+                            {% endif %}
+                            {% for error in form.email.errors %}
+                            <div class="alert alert-danger" role="alert">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in errors %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div style="margin-top: 50px;">
+                        <h3>Password change</h3>
+                        <hr size="3">
+                        <div>
+                            <label for="old_password" class="form-label">Old password</label>
+                            <input type="password" name="old_password" class="form-control" id="old_password"
+                                   title="Enter the old password." autocomplete="password"/><br>
+                            {% for error in form.old_password.errors %}
+                            <div class="alert alert-danger" role="alert">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in errors %}
+                            {% if (error[1] == 'wrong_password') or (error[1] == 'old_password_not_filled') %}
+                            <div class="alert alert-danger" role="alert">{{ error[0] }}</div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <label for="new_password" class="form-label">New password</label>
+                            <input type="password" name="new_password" class="form-control" id="new_password"
+                                   title="Enter a new password." autocomplete="password"/><br>
+                            {% for error in form.new_password.errors %}
+                            <div class="alert alert-danger" role="alert">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in errors %}
+                            {% if (error[1] == 'password_is_too_easy') or (error[1] == 'new_password_not_filled') %}
+                            <div class="alert alert-danger" role="alert">{{ error[0] }}</div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <label for="confirm_new_password" class="form-label">Confirm new passwordd</label>
+                            <input type="password" name="confirm_new_password" class="form-control"
+                                   id="confirm_new_password" title="Enter the new password again."
+                                   autocomplete="password"/><br>
+                            {% for error in form.confirm_new_password.errors %}
+                            <div class="alert alert-danger" role="alert">{{ error }}</div>
+                            {% endfor %}
+                            {% for error in errors %}
+                            {% if error[1] == 'confirm_new_password_not_filled' %}
+                            <div class="alert alert-danger" role="alert">{{ error[0] }}</div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;" align="center" class="d-grid gap-1 col-10 mx-auto">
+                    <input class="btn btn-success btn-lg" type="submit" name="submit" value="Save all">
+                </div>
+            </form>
+        </div>
+        <div style="margin-top: 130px; margin-left: 50px; margin-right: 50px;">
+            <h3 style="color:red" align="center">Account removing</h3>
+            <hr size="6" style="color:red">
+            <div style="margin-top: 20px;" align="right">
+                <a type="button" class="btn btn-outline-danger btn-sm" href="/remove_account"
+                   title="After removing account, you will be NOT able to restore it">Remove account</a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/css/quiz_selection.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Quiz Selection</h2>
+    <ul class="quiz-list">
+        {% for quiz_id in quizzes_manager.get_quizzes_set() %}
+        {% set param = dict(quiz_id=quiz_id, question_number=1) %}
+        <li><a href="{{ url_for('quiz_question', **param) }}">{{ quizzes_manager.get_quiz_name(quiz_id) }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

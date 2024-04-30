@@ -1,0 +1,21 @@
+body {
+    background-color: #f8f9fa;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+    .quiz-list {
+    list-style-type: none;
+    padding: 0;
+}
+.quiz-list li {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.quiz-list li a {
+    text-decoration: none;
+    color: #007bff;
+}

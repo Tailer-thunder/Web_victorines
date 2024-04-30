@@ -1,0 +1,90 @@
+[
+  {
+    "question": "A: Photons have no rest mass.\nB: Photons possess momentum.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "Both facts are true",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  },
+  {
+    "question": "A: All black holes will eventually evaporate due to Hawking radiation.\nB: Supermassive black holes can be billions of times more massive than the Sun.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "Both facts are true",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  },
+  {
+    "question": "A: String theory postulates the existence of additional spatial dimensions that are curled up into tiny sizes.\nB: String theory has been experimentally confirmed.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "True only A",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  },
+  {
+    "question": "A: Quantum entanglement allows two particles to be correlated with each other regardless of the distance between them.\nB: Quantum entanglement violates the theory of relativity.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "True only A",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  },
+  {
+    "question": "A: Neurons in the brain communicate with each other using electrical and chemical signals.\nB: The human brain is capable of unlimited learning and memory.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "Both facts are true",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  },
+  {
+    "question": "A: Human activity influences global warming.\nB: Consequences of global warming may include sea level rise, extreme weather events, and changes in biodiversity.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "Both facts are true",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  },
+  {
+    "question": "A: Einstein developed the theory of quantum gravity.\nB: Newton worked on the special theory of relativity.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "Both facts are false",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  },
+  {
+    "question": "A: Positrons have no charge.\nB: The period of oscillation of microwave radiation is greater than that of gamma radiation.",
+    "answers": [
+      "True only A",
+      "True only B",
+      "Both facts are true",
+      "Both facts are false"
+    ],
+    "correct_answer": "True only B",
+    "image": "https://i.postimg.cc/1t51Jqyy/science.jpg"
+  }
+]
