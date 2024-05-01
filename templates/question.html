@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Question</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Question {{ question_number }}</h1>
+    {% for line in question.split("\n") %}
+    <h3>{{ line }}</h3>
+    {% endfor %}
+    <img src="{{ image }}" alt="">
+    <div id="timer"></div> <!-- Таймер -->
+    <form method="post">
+        {% for answer in answers %}
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="answer" id="{{ answer }}" value="{{ answer }}">
+            <label class="form-check-label" for="{{ answer }}">
+                {{ answer }}
+            </label>
+        </div>
+        {% endfor %}
+        <input type="hidden" id="timeLeft" name="timeLeft"> <!-- Скрытое поле для передачи оставшегося времени -->
+        <input type="hidden" id="quizId" name="quizId" value="{{ quiz_id }}">
+        <!-- Скрытое поле для передачи идентификатора викторины -->
+        <input type="hidden" id="questionNumber" name="questionNumber" value="{{ question_number }}">
+        <!-- Скрытое поле для передачи номера текущего вопроса -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% if question_number > 1 %}
+    <a href="{{ url_for('quiz_question', quiz_id=quiz_id, question_number=question_number-1) }}"
+       class="btn btn-secondary">Previous Question</a>
+    {% endif %}
+</div>
+<script>
+    window.onload = function() {
+        var quizTimeLeft = 60; // Устанавливаем время на вопрос в секундах
+
+        // Функция для обновления таймера каждую секунду
+        function updateTimer() {
+            var minutes = Math.floor(quizTimeLeft / 60);
+            var seconds = quizTimeLeft % 60;
+            document.getElementById('timer').innerText = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            quizTimeLeft--;
+
+            if (quizTimeLeft < 0) {
+                clearInterval(timerInterval);
+                alert('Time is up! Redirecting to quiz results...');
+                window.location.href = "{{ url_for('quiz_results') }}"; // Перенаправление на страницу результатов
+            }
+        }
+
+        // Начать обновление таймера
+        var timerInterval = setInterval(updateTimer, 1000);
+
+        // Устанавливаем значение скрытого поля
+        document.getElementById('quizTimeLeft').value = quizTimeLeft;
+    };
+</script>
+</body>
+</html>

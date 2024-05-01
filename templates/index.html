@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<main role="main" class="container" style="margin-top: 50px; margin-bottom: 100px;" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
+        <h1 class="text-center">Home</h1>
+        <h3 class="text-center">Welcome to the Quiz App!</h3>
+        {% if is_authorized %}
+        <br>
+        <h4 class="text-center">You are already authorized:</h4>
+        <div align="center">
+            <a type="button" class="btn btn-success btn-lg" href="{{ url_for('quiz_selection') }}">Select quiz!</a>
+        </div>
+        {% endif %}
+    </div>
+    </div>
+</main>
+{% endblock %}
