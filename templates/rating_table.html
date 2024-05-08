@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block head %}
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="door" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+    </symbol>
+    <symbol id="arrow" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+    </symbol>
+</svg>
+{% endblock %}
+
+{% block content %}
+<div role="main" class="container">
+    <a type="return" class="btn btn-outline-primary icon-link" href="{{ url_for('my_account') }}"
+       title="Go back to my account page.">
+        <svg class="bi">
+            <use xlink:href="#door"/>
+            <use xlink:href="#arrow"/>
+        </svg>
+        <b>Go back</b>
+    </a>
+    <ol class="list-group list-group-numbered" style="overflow-y: scroll; height: 5000px;">
+        {% for user in rating_list %}
+        <li class="list-group-item d-flex"
+            style="{% if user.id == current_user_id %}background-color: #adb5bd;{% endif %}">
+            <div class="p-2">
+                <div class="fw-bold" style="width: 200px;">{{ user.username }}</div>
+            </div>
+            <div class="ms-auto p-2">
+                <span class="badge text-bg-success">{{ user.rating }} points</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+{% endblock %}

@@ -9,6 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import InputRequired, Email, EqualTo, Optional, ValidationError
 
+from datetime import datetime
 from config import mail as mail_configuration
 
 app = Flask(__name__)
@@ -60,6 +61,70 @@ def send_confirmation_code(email: str) -> str:
         raise CantSendEmail
     else:  # Если отправка успешна, то возвращаем код подтверждения
         return confirmation_code
+
+
+def save_result_of_quiz(*, user_id: int | str, quiz_id: int | str, total_questions: int = None,
+                        number_of_correct: int) -> None:
+    """
+    Функция сохраняет результат выполнения викторины в базу данных, самостоятельно вычисляя баллы и время выполнения.
+    Параметры:
+        <user_id> - ID пользователя, который выполнил викторину (int или str).
+        <quiz_id> - ID викторины, которая была выполнена (int или str).
+        <total_questions> - необязательный параметр, общее количество вопросов в викторине (int).
+        <number_of_correct> - количество правильных ответов (int).
+    Все параметры необходимо передавать как именованные.
+    """
+    # Если параметры user_id и quiz_id не являются числами или строками, то выбрасываем исключение TypeError
+    if any(map(lambda x: not (isinstance(x, int) or isinstance(x, str)), (user_id, quiz_id))):
+        raise TypeError("user_id and quiz_id must be int or str")
+    # Если общее количество вопросов не указано, то получаем его от менеджера викторин
+    if total_questions is None:
+        total_questions = len(quizzes_manager.get_quiz_questions(quiz_id))
+    # Если параметры total_questions и number_of_correct не являются числами, то выбрасываем исключение TypeError
+    if any(map(lambda x: not isinstance(x, int), (total_questions, number_of_correct))):
+        raise TypeError("total_question and num_correct must be int")
+
+    if total_questions <= 0:
+        raise ValueError("total_question must be greater than 0")
+
+    user_id, quiz_id = int(user_id), int(quiz_id)
+    scores = int(round(number_of_correct / total_questions, 4) * 10_000)  # Высчитываем баллы за викторину
+
+    # Сохраняем результат в базу данных
+    new_result = ResultOfQuiz(user_id=user_id, quiz_id=quiz_id, scores=scores, time=datetime.now())
+    db.session.add(new_result)
+    db.session.commit()
+
+
+def update_rating(user_id: int | str) -> None:
+    """
+    Функция обновляет рейтинг пользователя.
+    Принимает единственный параметр <user_id>: (int или str).
+    """
+    # Если параметр user_id не является числом или строкой, то выбрасываем исключение TypeError
+    if not (isinstance(user_id, int) or isinstance(user_id, str)):
+        raise TypeError("user_id must be int or str")
+
+    # Получаем пользователя из базы данных
+    user_id = int(user_id)
+    user = User.query.filter_by(id=user_id).first()
+    if not user:
+        raise ValueError(f"user with ID={user_id} does not exist")
+
+    # Получаем список результатов из базы данных
+    log_of_results = ResultOfQuiz.query.filter_by(user_id=user_id).order_by(ResultOfQuiz.scores.desc()).all()
+    # Вычисляем рейтинг пользователя
+    quizzes_already_taken_into = []
+    total_scores = 0
+    for result in log_of_results:
+        if result.quiz_id not in quizzes_already_taken_into:
+            total_scores += result.scores
+            quizzes_already_taken_into.append(result.quiz_id)
+    total_scores = total_scores // 100
+
+    # Записываем рейтинг пользователя в базу данных
+    user.rating = total_scores
+    db.session.commit()
 
 
 def new_password_validator(password) -> str:
@@ -121,6 +186,19 @@ class OneTimeCode(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, unique=True, index=True)
     # Хэшированный код
     code = db.Column(db.String(100), nullable=False)
+
+
+class ResultOfQuiz(db.Model):
+    # ID результата
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False, unique=True, index=True)
+    # ID пользователя, который выполнил викторину
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, unique=False, index=True)
+    # ID выполненной викторины
+    quiz_id = db.Column(db.Integer, nullable=False, unique=False, index=False)
+    # Баллы (<процент выполнения> / 1% * 100), например: 66.67% это 6667
+    scores = db.Column(db.Integer, nullable=False, unique=False, index=False)
+    # Время выполнения викторины, т.е. когда она была выполнена
+    time = db.Column(db.DateTime, nullable=False)
 
 
 def get_edit_profile_form(user):
@@ -566,13 +644,24 @@ def my_account():
     email_confirmation_required = False  # Сообщение о необходимости подтверждения почты
     validation_errors = []  # Список ошибок валидации
     user = db.session.query(User).filter(User.id == session['user_id']).first()  # Получаем пользователя из базы данных
+    if not user:  # Если пользователь не найден, то переадресовываем на страницу авторизации
+        return redirect(url_for('signin'))
     form = get_edit_profile_form(user)  # Получаем форму для редактирования профиля пользователя из базы данных
+    # Получаем список результатов пользователя из базы данных
+    log_of_results = ResultOfQuiz.query.filter_by(user_id=user.id).order_by(ResultOfQuiz.time.desc()).all()
+
+    # Создаем таблицу с результатами
+    results_table = []
+    for result in log_of_results:
+        results_table.append({'name': quizzes_manager.get_quiz_name(result.quiz_id), 'scores': result.scores // 100,
+                              'data': f"{result.time:%d %b %Y}", 'time': f"{result.time:%H:%M}"})
+
     param = {
         'title': 'My account',
         'user': user,  # Передаем пользователя из базы данных в шаблон
         'user_id': session['user_id'],  # Передаем ID пользователя из базы данных в шаблон, чтобы его отобразить в форме
         'is_authorized': True,
-        'rating': user.rating  # Передаем рейтинг пользователя из базы данных в шаблон
+        'quizzes_history': results_table,
     }
 
     if request.method == 'POST' and form.validate():
@@ -624,6 +713,10 @@ def my_account():
 def remove_account():
     if 'user_id' not in session:  # Если пользователь не авторизован, то переадресовываем на страницу авторизации
         return redirect(url_for('signin'))
+    user = User.query.filter_by(id=session['user_id']).first()  # Получаем пользователя из базы данных
+    if not user:  # Если пользователь не найден, то переадресовываем на страницу авторизации
+        return redirect(url_for('signin'))
+
     validation_errors = []
     form = get_remove_account_form()
     if request.method == 'POST' and form.validate():
@@ -634,16 +727,39 @@ def remove_account():
             validation_errors.append((ValidationError('Invalid password'), 'wrong_password'))
         if not validation_errors:
             del session['user_id']
+            ResultOfQuiz.query.filter_by(user_id=user.id).delete()
             db.session.query(User).filter(User.id == user.id).delete()
             db.session.commit()
             return redirect(url_for('index'))
     param = {
         'title': 'Удаление аккаунта',
-        'session': True,
+        'is_authorized': True,
         'errors': validation_errors
     }
     # Возвращаем шаблон с формой для удаления профиля пользователя
     return render_template('remove_account.html', form=form, **param)
+
+
+@app.route('/rating_table')
+def rating_table():
+    # Если пользователь не авторизован, то переадресовываем на страницу авторизации
+    if 'user_id' not in session:
+        return redirect(url_for('signin'))
+    user = User.query.filter_by(id=session['user_id']).first()  # Получаем пользователя из базы данных
+    # Если пользователь не найден, то переадресовываем на страницу авторизации
+    if not user:
+        return redirect(url_for('signin'))
+
+    # Получаем список пользователей, отсортированный по рейтингу
+    rating_list = User.query.order_by(User.rating.desc()).all()
+
+    param = {
+        'title': 'Rating table',
+        'is_authorized': True,
+        'rating_list': rating_list,
+        'current_user_id': user.id
+    }
+    return render_template('rating_table.html', **param)
 
 
 @app.route('/quiz_selection')
@@ -727,6 +843,13 @@ def quiz_results():
     session.pop('num_correct', None)
     if num_correct > total_questions:
         num_correct = total_questions
+
+    # Сохраняем результат выполнения викторины
+    save_result_of_quiz(user_id=session['user_id'], quiz_id=session['quiz_id'], total_questions=total_questions,
+                        number_of_correct=num_correct)
+    # Обновляем рейтинг пользователя
+    update_rating(user_id=session['user_id'])
+
     return render_template('quiz_results.html', num_correct=num_correct, total_questions=total_questions)
 
 

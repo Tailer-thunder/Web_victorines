@@ -15,18 +15,36 @@
 {% block content %}
 <main role="main" class="container" style="margin-top: 50px; margin-bottom: 100px;">
     <section>
-        <h1 align="center">Current rating is: {{ rating }} points</h1>
-        <br><br>
-        <div class="card" style="width: 600px;">
-            <div class="card-header">
-                History of quizzes
-            </div>
-            <ul class="list-group list-group-flush">
+        <h1 align="center">Current rating is: {{ user.rating }} points</h1>
+        <br>
+        <div align="center" class="d-grid gap-1 col-10 mx-auto">
+            <a type="text/html" class="btn btn-outline-primary btn-lg" id="goto_rating_table"
+               href="{{ url_for('rating_table') }}" title="View the rating table.">Rating table</a>
+        </div>
+        <div class="card" style="width: 600px; top: 40px;">
+            <h5 class="card-header">History of quizzes</h5>
+            <ul class="list-group list-group-flush" style="overflow-y: scroll; height: 315px;">
                 {% if not quizzes_history %}
                 <li class="list-group-item">It's empty, so far...</li>
                 {% else %}
                 {% for result in quizzes_history %}
-                <li class="list-group-item">{{ result }}</li>
+                {% if result.scores < 50 %}
+                {% set color='text-danger' %}
+                {% elif result.scores < 75 %}
+                {% set color='text-warning' %}
+                {% else %}
+                {% set color='text-success' %}
+                {% endif %}
+                <li class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <p class="mb-1">{{ result['name'] }}</p>
+                        <small>{{ result['data'] }}</small>
+                    </div>
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1 {{ color }}">{{ result['scores'] }}%</h5>
+                        <small>{{ result['time'] }}</small>
+                    </div>
+                </li>
                 {% endfor %}
                 {% endif %}
             </ul>
