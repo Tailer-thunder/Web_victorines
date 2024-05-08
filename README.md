@@ -20,15 +20,15 @@
 ## Example of website
 
 ### Home Page
-![HomePage](C:\Users\NB\Downloads\Telegram Desktop\3 After login.png "Home Page")
+![HomePage](https://i.postimg.cc/zGwNRg6j/3-After-login.png "Home Page")
 ### Authorization Page
-![AuthorizationPage](C:\Users\NB\Downloads\Telegram Desktop\2 Login.png "Authorization Page")
+![AuthorizationPage](https://i.postimg.cc/7ZrD6Vsh/2-Login.png "Authorization Page")
 ### Quiz Selection Page
-![QuizSelectionPage](C:\Users\NB\Downloads\Telegram Desktop\6 Choosing a quiz.png "Quiz Selection Page")
+![QuizSelectionPage](https://i.postimg.cc/d0qYR0KK/6-Choosing-a-quiz.png "Quiz Selection Page")
 ### Statistics Page
-![StatisticsPage](C:\Users\NB\Downloads\Telegram Desktop\4 Statistics.png "Statistics Page")
+![StatisticsPage](https://i.postimg.cc/T2ST8Gnr/4-Statistics.png "Statistics Page")
 ### Rating Page
-![RatingPage](C:\Users\NB\Downloads\Telegram Desktop\8 Rating table.png "Rating Page")
+![RatingPage](https://i.postimg.cc/N0pwdwg2/8-Rating-table.png "Rating Page")
 
 
 ## Requirements
