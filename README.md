@@ -20,15 +20,15 @@
 ## Example of website
 
 ### Home Page
-![HomePage]("C:\Users\NB\Downloads\Telegram Desktop\3 After login.png" "Home Page")
+![HomePage](C:\Users\NB\Downloads\Telegram Desktop\3 After login.png "Home Page")
 ### Authorization Page
-![AuthorizationPage]("C:\Users\NB\Downloads\Telegram Desktop\2 Login.png" "Authorization Page")
+![AuthorizationPage](C:\Users\NB\Downloads\Telegram Desktop\2 Login.png "Authorization Page")
 ### Quiz Selection Page
-![QuizSelectionPage]("C:\Users\NB\Downloads\Telegram Desktop\6 Choosing a quiz.png" "Quiz Selection Page")
+![QuizSelectionPage](C:\Users\NB\Downloads\Telegram Desktop\6 Choosing a quiz.png "Quiz Selection Page")
 ### Statistics Page
-![StatisticsPage]("C:\Users\NB\Downloads\Telegram Desktop\4 Statistics.png" "Statistics Page")
+![StatisticsPage](C:\Users\NB\Downloads\Telegram Desktop\4 Statistics.png "Statistics Page")
 ### Rating Page
-![RatingPage]("C:\Users\NB\Downloads\Telegram Desktop\8 Rating table.png" "Rating Page")
+![RatingPage](C:\Users\NB\Downloads\Telegram Desktop\8 Rating table.png "Rating Page")
 
 
 ## Requirements
@@ -41,7 +41,6 @@
 
 
 ## Links
-
 ### Miro
 [Miro link]<https://miro.com/welcome/TVV5VFFDaFBxZG1JbVBLbVJSdENndHhzQXFTYlIwUnlRUEhzVDhIb29ZUTY1b2Y0azd2Sm1qZTZxc2YwdHlYcHwzNDU4NzY0NTgyNTQ3MTQ1NjgwfDQ=?share_link_id=718771173862>
 
