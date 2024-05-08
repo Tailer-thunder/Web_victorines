@@ -1,48 +1,58 @@
-# Web_victorines
-Задание:
+# WebVictorines
+**WebVictorines** a website with a database of cinematography.
+*You can*:
++ Create an account with a name, password and email
++ Take quizzes on various topics with images in a limited time
++ Watch the results of the completed quizzes and look at your place in the ranking
 
-Оценка 3:
 
-Цель: Создать веб-сервис с базовыми функциями для проведения викторин
+## About team
 
-Функциональные требования:
-1. Управление аккаунтом:
-- Регистрация с использованием имени, электронной почты и пароля
-- Хеширование всех персональных данных, включая пароли, для обеспечения безопасности.
-- Вход в систему с проверкой учетных данных.
-2. Проведение викторины:
-- Возможность выбирать вопросы из набора заранее сохраненных тем и отвечать на них
-- Вопросы состоят из собственно вопроса и 4 возможных ответов на него. Игроки должны выбрать нужный ответ за ограниченное время
+Группа **М8О-106Б-23**
 
-Оценка 4: 
++ Коробейников Даниил (тимлид)
++ Сергеев Владимир (backend)
++ Филиппов Егор (frontend)
++ Штанникова Екатерина (архитектор + frontend)
++ Павлов Максим (backend)
 
-Цель: Добавить возможность проведения викторины против других пользователей и создание своего контента
 
-Функциональные требования:
-1. Мультиплеер: 
-- Создание комнат в которые смогут присоединяться другие игроки и совместно решать одну викторину (аналогия "Своя Игра")
-- Демонстрация результатов викторины в конце: кто победил и с каким количеством условных баллов
-2. Использование изображений:
-- Викторина должна иметь возможность использовать изображений для своих вопросов
-3. Создание своих наборов вопросов:
-- Использовать архив для хранения данных викторины с заранее заданной структурой
-- Возможность создавать свои наборы по заданной на сайте инструкции 
+## Example of website
 
-Оценка 5: 
+### Home Page
+![HomePage]("C:\Users\NB\Downloads\Telegram Desktop\3 After login.png" "Home Page")
+### Authorization Page
+![AuthorizationPage]("C:\Users\NB\Downloads\Telegram Desktop\2 Login.png" "Authorization Page")
+### Quiz Selection Page
+![QuizSelectionPage]("C:\Users\NB\Downloads\Telegram Desktop\6 Choosing a quiz.png" "Quiz Selection Page")
+### Statistics Page
+![StatisticsPage]("C:\Users\NB\Downloads\Telegram Desktop\4 Statistics.png" "Statistics Page")
+### Rating Page
+![RatingPage]("C:\Users\NB\Downloads\Telegram Desktop\8 Rating table.png" "Rating Page")
 
-Цель: Расширить функционал веб сервиса
 
-Функциональные требования:
-1. Командный мультиплеер
-- Возможность создания второго варианта комнаты с возможностью совместно отвечать на вопросы при помощи голосования
-- Диалоговое окно игроков в комнате
-2. : Создание наборов вопросов в веб сервисе
-- Возможность создавать наборы непосредственно на сайте
-- Использовать собственный формат данных для хранения информации
-3. Рейтинг пользователей:
-- Ведение открытого рейтинга пользователей
-4. Интеграция с SQLite:
-- Хранение данных пользователя, истории оценок и предпочтений в SQLite.
-- Обеспечение безопасности данных с использованием хеширования.
+## Requirements
 
-Тимлид: Коробейников Даниил
++ Python 3.11.4+
++ flask 
++ flask_sqlalchemy
++ flask_mail
++ SQLite
+
+
+## Links
+
+### Miro
+[Miro link]<https://miro.com/welcome/TVV5VFFDaFBxZG1JbVBLbVJSdENndHhzQXFTYlIwUnlRUEhzVDhIb29ZUTY1b2Y0azd2Sm1qZTZxc2YwdHlYcHwzNDU4NzY0NTgyNTQ3MTQ1NjgwfDQ=?share_link_id=718771173862>
+
+
+### WEEEK Tracker
+[WEEEK link]<https://app.weeek.net/?ws-id=559045&invite-code=xzHCO06VfvbM3w1N&lang=ru-RU&utm_source=sharelink&utm_medium=tm&utm_campaign=559045https://yougile.com/board/v13ah4r3oq4u>
+
+
+## Sources
+
++ [Flask] <https://habr.com/ru/articles/346348/>
++ [Flask_sqlalchemy] <https://flask-sqlalchemy.palletsprojects.com/en/latest/>
++ [Flask_sqlalchemy] <https://www.sqlalchemy.org/>
++ [SQLite Documentation] <https://www.sqlite.org/docs.html>
