@@ -10,20 +10,21 @@ from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import InputRequired, Email, EqualTo, Optional, ValidationError
 
 from datetime import datetime
+from config import mail as mail_configuration
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
 app.secret_key = 'your_secret_key'
 
 # Устанавливаем параметры приложения для отправки писем по SMTP
-app.config['MAIL_SERVER'] = 'smtp.mail.ru'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'no-reply-webvictorines@mail.ru'
-app.config['MAIL_PASSWORD'] = 'yBFBVnd6bcfdvuBUP6LF'
-app.config['MAIL_DEFAULT_SENDER'] = 'no-reply-webvictorines@mail.ru'
-app.config['MAIL_ASCII_ATTACHMENTS'] = True
+app.config['MAIL_SERVER'] = mail_configuration.server
+app.config['MAIL_PORT'] = mail_configuration.port
+app.config['MAIL_USE_TLS'] = mail_configuration.TLS
+app.config['MAIL_USE_SSL'] = mail_configuration.SSL
+app.config['MAIL_USERNAME'] = mail_configuration.address
+app.config['MAIL_PASSWORD'] = mail_configuration.password
+app.config['MAIL_DEFAULT_SENDER'] = mail_configuration.address
+app.config['MAIL_ASCII_ATTACHMENTS'] = mail_configuration.ASCII
 # Создаем экземпляр менеджера для работы с письмами
 mail = Mail(app)
 
