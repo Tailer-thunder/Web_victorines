@@ -21,23 +21,31 @@
 
 ### Home Page
 ![HomePage](https://i.postimg.cc/zGwNRg6j/3-After-login.png "Home Page")
+
 ### Authorization Page
 ![AuthorizationPage](https://i.postimg.cc/7ZrD6Vsh/2-Login.png "Authorization Page")
+
 ### Quiz Selection Page
 ![QuizSelectionPage](https://i.postimg.cc/d0qYR0KK/6-Choosing-a-quiz.png "Quiz Selection Page")
+
+### Victorine Page
+![VictorinePage](https://i.postimg.cc/JnFCWcH1/7-Answer-the-questions.png "Victorine Page")
+
 ### Statistics Page
 ![StatisticsPage](https://i.postimg.cc/T2ST8Gnr/4-Statistics.png "Statistics Page")
+
 ### Rating Page
 ![RatingPage](https://i.postimg.cc/N0pwdwg2/8-Rating-table.png "Rating Page")
 
 
-## Requirements
+## Technologies
 
 + Python 3.11.4+
 + flask 
 + flask_sqlalchemy
 + flask_mail
 + SQLite
++ smtplib
 
 
 ## Links
