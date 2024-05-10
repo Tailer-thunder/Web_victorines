@@ -17,6 +17,14 @@
             <input type="email" class="form-control" id="login" name="login" value="{{ inputted_email }}"
                    autocomplete="login" required>
         </div>
+        <label for="recommended_password">Recommended password:</label>
+        <div class="d-flex">
+            <input type="text" class="form-control" id="recommended_password" value="{{ recommended_password }}"
+                   readonly>
+            <button type="button" class="btn btn-outline-secondary" onclick="get_strong_password()"
+                    title="Generate strong password.">Generate
+            </button>
+        </div>
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" class="form-control" id="password" name="password" autocomplete="password" required>
@@ -32,5 +40,16 @@
         <h5 style="padding-top: 40px;">Already have an account?</h5>
         <a type="button" class="btn btn-success btn-sm" href="{{ url_for('signin') }}">Sign in</a>
     </form>
+    <script>
+        function get_strong_password() {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', '{{ url_for('get_strong_password') }}', true);
+          xhr.onload = function() {
+            var element = document.getElementById('recommended_password');
+            element.value = xhr.responseText;
+          };
+          xhr.send();
+        }
+    </script>
 </div>
 {% endblock %}

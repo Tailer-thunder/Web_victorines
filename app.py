@@ -1,6 +1,6 @@
 from os import environ, urandom
 
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, abort
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, abort, make_response
 from flask_mail import Mail, Message
 from smtplib import SMTPRecipientsRefused, SMTPDataError
 from flask_sqlalchemy import SQLAlchemy
@@ -10,7 +10,7 @@ from wtforms import Form, StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import InputRequired, Email, EqualTo, Optional, ValidationError
 
 from datetime import datetime
-from config import mail as mail_configuration
+from config import mail as mail_configuration  # Импортируем файл конфигурации
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quiz.db'
@@ -55,9 +55,9 @@ def send_confirmation_code(email: str) -> str:
 
     try:  # Пытаемся отправить письмо
         mail.send(msg)
-    except SMTPRecipientsRefused as e:  # Невозможно отправить письмо, так как адрес неверный
+    except SMTPRecipientsRefused:  # Невозможно отправить письмо, так как адрес неверный
         raise CantSendEmail
-    except SMTPDataError as e:  # Невозможно отправить письмо, так как адрес не существует
+    except SMTPDataError:  # Невозможно отправить письмо, так как адрес не существует
         raise CantSendEmail
     else:  # Если отправка успешна, то возвращаем код подтверждения
         return confirmation_code
@@ -168,6 +168,30 @@ def check_data_for_password_changing(old_password, new_password, confirm_new_pas
             validation_errors.append((ValidationError('To change the password, confirm the new password'),
                                       'confirm_new_password_not_filled'))
     return validation_errors
+
+
+def generate_strong_password() -> str:
+    """
+    Функция генерирует надежный пароль из 16 знаков.
+    Не принимает параметров, возвращает пароль в виде строки.
+    """
+    password = ''
+    flag = True
+    while flag or new_password_validator(password):  # Проверяем пароль на надежность, в первый раз проверку пропускаем
+        password = []
+        flag = False
+        i = 0
+        while i < 16:
+            # Каждая итерация цикла генерирует один или ноль знаков
+            char_code = int.from_bytes(urandom(1), 'big') & 0b0111_1111
+            # Так как один байт - это слишком много для ASCII, применили битовую маску
+
+            # Если код знака в интервале [33, 126], то добавляем его в пароль
+            if 33 <= char_code <= 126:
+                password.append(chr(char_code))
+                i += 1
+        password = ''.join(password)  # Превращаем пароль в строку
+    return password
 
 
 class User(db.Model):
@@ -401,18 +425,36 @@ def get_time_left():
     return jsonify({'time_left': time_left})
 
 
+@app.route('/get_strong_password')
+def get_strong_password():
+    response = make_response(generate_strong_password(), 200)  # Создаем ответ
+    response.mimetype = "text/plain"  # Устанавливаем тип ответа
+    return response  # Возвращаем ответ
+
+
 @app.route('/')
 def index():
     param = {
         'title': 'Home',
+        # Установили заголовок страницы
         'is_authorized': 'user_id' in session
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
     }
     return render_template('index.html', **param)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    param = {'title': 'Sign up'}
+    param = {
+        'title': 'Sign up',
+        # Установили заголовок страницы
+        'is_authorized': False,
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
+        'recommended_password': generate_strong_password()
+        # Передали рекомендуемый пароль, чтобы пользователю не пришлось придумывать его самостоятельно
+    }
     if request.method == 'POST':
         # Проверка на корректность поученной формы
         if 'name' not in request.form or 'login' not in request.form or 'password' not in request.form:
@@ -620,10 +662,21 @@ def signin():
                     abort(403)
         param['alert_message'] = 'Incorrect username or password. Please try again.'
         return render_template('login.html', **param)
-    if 'user_id' in session:
+
+    if 'user_id' in session:  # Если пользователь авторизован как обычный пользователь
+        user = User.query.filter_by(id=session['user_id']).first()  # Получаем пользователя из базы данных
+        if not user:  # Если пользователь не найден, то отзываем авторизацию и переадресовываем на страницу авторизации
+            del session['user_id']
+            return redirect(url_for('signin'))
         return redirect(url_for('quiz_selection'))
-    if 'restricted_user_id' in session:
+
+    if 'restricted_user_id' in session:  # Если пользователь авторизован как ограниченный пользователь
+        user = User.query.filter_by(id=session['restricted_user_id']).first()  # Получаем пользователя из базы данных
+        if not user:  # Если пользователь не найден, то отзываем авторизацию и переадресовываем на страницу авторизации
+            del session['restricted_user_id']
+            return redirect(url_for('signin'))
         return redirect(url_for('email_confirmation'))
+
     return render_template('login.html', **param)
 
 
@@ -658,9 +711,12 @@ def my_account():
 
     param = {
         'title': 'My account',
+        # Указали заголовок страницы
         'user': user,  # Передаем пользователя из базы данных в шаблон
         'user_id': session['user_id'],  # Передаем ID пользователя из базы данных в шаблон, чтобы его отобразить в форме
         'is_authorized': True,
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
         'quizzes_history': results_table,
     }
 
@@ -717,8 +773,8 @@ def remove_account():
     if not user:  # Если пользователь не найден, то переадресовываем на страницу авторизации
         return redirect(url_for('signin'))
 
-    validation_errors = []
-    form = get_remove_account_form()
+    validation_errors = []  # Создаем список ошибок валидации
+    form = get_remove_account_form()  # Получаем форму для удаления аккаунта
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(id=session['user_id']).first()
         if not user:
@@ -733,7 +789,10 @@ def remove_account():
             return redirect(url_for('index'))
     param = {
         'title': 'Удаление аккаунта',
+        # Указали заголовок страницы
         'is_authorized': True,
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
         'errors': validation_errors
     }
     # Возвращаем шаблон с формой для удаления профиля пользователя
@@ -755,7 +814,10 @@ def rating_table():
 
     param = {
         'title': 'Rating table',
+        # Указали заголовок страницы
         'is_authorized': True,
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
         'rating_list': rating_list,
         'current_user_id': user.id
     }
@@ -764,24 +826,22 @@ def rating_table():
 
 @app.route('/quiz_selection')
 def quiz_selection():
-    if 'user_id' not in session:
-        return redirect(
-            url_for('signin'))  # Если пользователь не авторизован, то переадресовываем на страницу авторизации
+    if 'user_id' not in session:  # Если пользователь не авторизован, то переадресовываем на страницу авторизации
+        return redirect(url_for('signin'))
+    user = User.query.filter_by(id=session['user_id']).first()  # Получаем пользователя из базы данных
+    if not user:  # Если пользователь не найден, то переадресовываем на страницу авторизации
+        return redirect(url_for('signin'))
+
     param = {
         'title': 'Quiz selection',
+        # Указали заголовок страницы
         'is_authorized': True,
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
         'quizzes_manager': quizzes_manager
+        # Передали менеджер викторин в шаблон
     }
     return render_template('quiz_selection.html', **param)
-
-
-@app.route('/start_quiz/<quiz_id>')
-def start_quiz(quiz_id):
-    if quiz_id.lower() == 'breaking_bad' or quiz_id.lower() == 'house':
-        session['quiz_id'] = quiz_id
-        return redirect(url_for('quiz_question', quiz_id=quiz_id, question_number=1))
-    else:
-        return "Invalid quiz"
 
 
 @app.route('/quiz', methods=['GET', 'POST'])
@@ -795,6 +855,10 @@ def quiz_question():
     # Check if the user is logged in
     if 'user_id' not in session:
         flash('Please log in to access the quiz.', 'error')
+        return redirect(url_for('signin'))
+
+    user = User.query.filter_by(id=session['user_id']).first()  # Получаем пользователя из базы данных
+    if not user:  # Если пользователь не найден, то переадресовываем на страницу авторизации
         return redirect(url_for('signin'))
 
     if not quizzes_manager.check_for_existence(quiz_id):
@@ -844,26 +908,39 @@ def quiz_results():
     if num_correct > total_questions:
         num_correct = total_questions
 
-    # Сохраняем результат выполнения викторины
-    save_result_of_quiz(user_id=session['user_id'], quiz_id=session['quiz_id'], total_questions=total_questions,
-                        number_of_correct=num_correct)
-    # Обновляем рейтинг пользователя
-    update_rating(user_id=session['user_id'])
+    # Если пользователь авторизован, то сохраняем результат выполнения викторины
+    if 'user_id' in session:
+        user = User.query.filter_by(id=session['user_id']).first()
+        if user:
+            # Сохраняем результат выполнения викторины
+            save_result_of_quiz(user_id=user.id, quiz_id=session['quiz_id'], total_questions=total_questions,
+                                number_of_correct=num_correct)
+            # Обновляем рейтинг пользователя
+            update_rating(user_id=user.id)
 
     return render_template('quiz_results.html', num_correct=num_correct, total_questions=total_questions)
 
 
 @app.route('/new_quiz')
 def new_quiz():
-    params = {'title': 'New quiz', 'is_authorized': 'user_id' in session}
-    return render_template('new_quiz.html', **params)
+    params = {
+        'title': 'New quiz',
+        # Указали заголовок страницы
+        'is_authorized': 'user_id' in session
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
+    }
+    return render_template('new_quiz.html', **params)  # Отображаем заглушку
 
 
 @app.errorhandler(404)
 def page_not_found(e):
     param = {
         'title': 'Page not found',
+        # Указали заголовок страницы
         'is_authorized': 'user_id' in session
+        # Указали, что пользователь не авторизован как обычный пользователь
+        # (нужно для правильного отображения шапки сайта)
     }
     return render_template('404.html', **param), 404  # Отображение ошибки: страница не найдена
 
@@ -871,6 +948,6 @@ def page_not_found(e):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    quizzes_manager = QuizzesManager('./quizzes')
+    quizzes_manager = QuizzesManager('./quizzes')  # Подключаем менеджер викторин
     port = int(environ.get("PORT", 5000))  # Получение порта
     app.run(host='0.0.0.0', port=port, debug=True)  # Запуск приложения

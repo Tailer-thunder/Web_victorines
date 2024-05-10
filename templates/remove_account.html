@@ -40,7 +40,6 @@
                     <div>{{ form.confirm(class="form-check-input") }}&nbsp;&nbsp;I understand that I will not be able to
                         restore my account and I agree with this.
                     </div>
-                    <br>
                     {% for error in form.confirm.errors %}
                     <div class="alert alert-danger" role="alert" style="margin-top: 10px;">{{ error }}</div>
                     {% endfor %}
