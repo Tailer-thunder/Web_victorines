@@ -948,6 +948,6 @@ def page_not_found(e):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    quizzes_manager = QuizzesManager('./quizzes')  # Подлюкам менеджер викторин
+    quizzes_manager = QuizzesManager('./quizzes')  # Подключаем менеджер викторин
     port = int(environ.get("PORT", 5000))  # Получение порта
     app.run(host='0.0.0.0', port=port, debug=True)  # Запуск приложения
