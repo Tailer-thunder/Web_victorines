@@ -1,0 +1,113 @@
+[
+  {
+    "question": "Who is the leader of the Avengers?",
+    "answers": [
+      "Iron Man", 
+      "Captain America", 
+      "Thor", 
+      "Black Widow"
+    ],
+    "correct_answer": "Captain America",
+    "image": "https://i.postimg.cc/rs9zSmvn/mcu1-4-7-9.jpg"
+  },
+  {
+    "question": "Which infinity stone is green in color?",
+    "answers": [
+      "Space Stone", 
+      "Reality Stone", 
+      "Mind Stone", 
+      "Time Stone"
+    ],
+    "correct_answer": "Time Stone",
+    "image": "https://i.postimg.cc/qvqg3pQw/mcu2.jpg"
+  },
+  {
+    "question": "What is the name of Tony Stark's AI assistant?",
+    "answers": [
+      "J.A.R.V.I.S.", 
+      "F.R.I.D.A.Y.", 
+      "U.L.T.R.O.N.", 
+      "H.E.R.B.I.E."
+    ],
+    "correct_answer": "F.R.I.D.A.Y.",
+    "image": "https://i.postimg.cc/h48JFyfL/mcu3.jpg"
+  },
+  {
+    "question": "Which Avenger is known for having a shield made of vibranium?",
+    "answers": [
+      "Iron Man", 
+      "Black Panther", 
+      "Thor", 
+      "Captain America"
+    ],
+    "correct_answer": "Captain America",
+    "image": "https://i.postimg.cc/rs9zSmvn/mcu1-4-7-9.jpg"
+  },
+  {
+    "question": "What is the name of the planet where Thor is from?",
+    "answers": [
+      "Asgard", 
+      "Xandar", 
+      "Titan", 
+      "Vormir"
+    ],
+    "correct_answer": "Asgard",
+    "image": "https://i.postimg.cc/gkNnjxyr/mcu5.jpg"
+  },
+  {
+    "question": "Who is the main antagonist in 'Guardians of the Galaxy'?",
+    "answers": [
+      "Ronan the Accuser", 
+      "Thanos", 
+      "Loki", 
+      "Hela"
+    ],
+    "correct_answer": "Ronan the Accuser",
+    "image": "https://i.postimg.cc/mDfrJC4p/mcu6.jpg"
+  },
+  {
+    "question": "Which character holds the title of Sorcerer Supreme in the MCU?",
+    "answers": [
+      "Doctor Strange", 
+      "Scarlet Witch", 
+      "Loki", 
+      "Vision"
+    ],
+    "correct_answer": "Doctor Strange",
+    "image": "https://i.postimg.cc/rs9zSmvn/mcu1-4-7-9.jpg"
+  },
+  {
+    "question": "What is the real name of the villain Killmonger in 'Black Panther'?",
+    "answers": [
+      "N'Jobu", 
+      "M'Baku", 
+      "T'Chaka", 
+      "Erik Stevens"
+    ],
+    "correct_answer": "Erik Stevens",
+    "image": "https://i.postimg.cc/HkNn0Fhg/mcu8.jpg"
+  },
+  {
+    "question": "Which Avenger is also known as the 'God of Mischief'?",
+    "answers": [
+      "Thor", 
+      "Hulk", 
+      "Loki", 
+      "Hawkeye"
+    ],
+    "correct_answer": "Loki",
+    "image": "https://i.postimg.cc/rs9zSmvn/mcu1-4-7-9.jpg"
+  },
+  {
+    "question": "What is the name of the group of warriors in Wakanda who protect the nation?",
+    "answers": [
+      "Dora Milaje", 
+      "Wakandan Destroyers", 
+      "Black Order", 
+      "Ravagers"
+    ],
+    "correct_answer": "Dora Milaje",
+    "image": "https://i.postimg.cc/SKzsgVBz/mcu10.jpg"
+  }
+]
+  

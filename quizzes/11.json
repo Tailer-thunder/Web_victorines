@@ -1,0 +1,113 @@
+[
+  {
+    "question": "What is the capital city of Australia?",
+    "answers": [
+      "Sydney", 
+      "Melbourne", 
+      "Canberra", 
+      "Perth"
+    ],
+    "correct_answer": "Canberra",
+    "image": "https://i.postimg.cc/L55GVQWc/geo1.jpg"
+  },
+  {
+    "question": "Which country is the largest in terms of land area?",
+    "answers": [
+      "Russia", 
+      "Canada", 
+      "United States", 
+      "China"
+    ],
+    "correct_answer": "Russia",
+    "image": "https://i.postimg.cc/prS4cYbp/geo2.jpg"
+  },
+  {
+    "question": "What is the tallest mountain in the world?",
+    "answers": [
+      "Mount Everest", 
+      "K2", 
+      "Kanchenjunga", 
+      "Lhotse"
+    ],
+    "correct_answer": "Mount Everest",
+    "image": "https://i.postimg.cc/gkf1vDH7/geo3.jpg"
+  },
+  {
+    "question": "Where is the Great Barrier Reef located?",
+    "answers": [
+      "Caribbean Sea", 
+      "Red Sea", 
+      "Gulf of Mexico", 
+      "Coral Sea"
+    ],
+    "correct_answer": "Coral Sea",
+    "image": "https://i.postimg.cc/CMr3KYBS/geo4.jpg"
+  },
+  {
+    "question": "Which continent is known as the 'Dark Continent'?",
+    "answers": [
+      "Africa", 
+      "Europe", 
+      "Asia", 
+      "Antarctica"
+    ],
+    "correct_answer": "Africa",
+    "image": "https://i.postimg.cc/DzcD3K3V/geo5.jpg"
+  },
+  {
+    "question": "Which river is the longest in the world?",
+    "answers": [
+      "Amazon", 
+      "Mississippi", 
+      "Nile", 
+      "Yangtze"
+    ],
+    "correct_answer": "Nile",
+    "image": "https://i.postimg.cc/5tJGr2Gq/geo6.jpg"
+  },
+  {
+    "question": "In which country is the city of Marrakech located?",
+    "answers": [
+      "Egypt", 
+      "Morocco", 
+      "Turkey", 
+      "Tunisia"
+    ],
+    "correct_answer": "Morocco",
+    "image": "https://i.postimg.cc/C1L2F6wR/geo7.jpg"
+  },
+  {
+    "question": "What is the smallest country in the world?",
+    "answers": [
+      "Monaco", 
+      "San Marino", 
+      "Vatican City", 
+      "Liechtenstein"
+    ],
+    "correct_answer": "Vatican City",
+    "image": "https://i.postimg.cc/0QWBrdNc/geo8.jpg"
+  },
+  {
+    "question": "Which desert is the largest in the world?",
+    "answers": [
+      "Sahara", 
+      "Gobi", 
+      "Arabian", 
+      "Kalahari"
+    ],
+    "correct_answer": "Sahara",
+    "image": "https://i.postimg.cc/FzwCVr3S/geo9.jpg"
+  },
+  {
+    "question": "Which ocean is the largest on Earth?",
+    "answers": [
+      "Pacific Ocean", 
+      "Atlantic Ocean", 
+      "Indian Ocean", 
+      "Arctic Ocean"
+    ],
+    "correct_answer": "Pacific Ocean",
+    "image": "https://i.postimg.cc/Kj1sTkkF/geo10.jpg"
+  }
+]
+  
