@@ -1,0 +1,111 @@
+[
+  {
+    "question": "Which country won the FIFA World Cup in 2018?",
+    "answers": [
+      "Brazil", 
+      "Germany", 
+      "France", 
+      "Argentina"
+    ],
+    "correct_answer": "France",
+    "image": "https://i.postimg.cc/Kzqnt0B3/fb1.jpg"
+  },
+  {
+    "question": "Who holds the record for the most goals scored for the Portuguese national team?",
+    "answers": [
+      "Luís Figo", 
+      "Eusébio", 
+      "Cristiano Ronaldo", 
+      "Pauleta"
+    ],
+    "correct_answer": "Cristiano Ronaldo",
+    "image": "https://i.postimg.cc/BZzT6wJd/fb2.jpg"
+  },
+  {
+    "question": "Which club won the UEFA Champions League in 2021?",
+    "answers": [
+      "Real Madrid", 
+      "Barcelona", 
+      "Chelsea", 
+      "Bayern Munich"
+    ],
+    "correct_answer": "Chelsea",
+    "image": "https://i.postimg.cc/ZnW6H6x7/fb3.jpg"
+  },
+  {
+    "question": "What is the name of the stadium where FC Barcelona plays its home games?",
+    "answers": [
+      "Santiago Bernabéu", 
+      "Old Trafford", 
+      "Camp Nou", 
+      "Allianz Arena"
+    ],
+    "correct_answer": "Camp Nou",
+    "image": "https://i.postimg.cc/90sZnzxW/fb4.jpg"
+  },
+  {
+    "question": "Who is known as 'The Egyptian King' in the football world?",
+    "answers": [
+      "Mohamed Salah", 
+      "Mido", 
+      "Ahmed Hassan", 
+      "Mohamed Aboutrika"
+    ],
+    "correct_answer": "Mohamed Salah",
+    "image": "https://i.postimg.cc/V6VCJdPj/fb5.jpg"
+  },
+  {
+    "question": "Which player won the Ballon d'Or in 2021?",
+    "answers": [
+      "Lionel Messi", 
+      "Cristiano Ronaldo", 
+      "Robert Lewandowski", 
+      "Luka Modric"
+    ],
+    "correct_answer": "Lionel Messi",
+    "image": "https://i.postimg.cc/DybqbdZm/fb6.jpg"
+  },
+  {
+    "question": "What is the maximum number of substitutions allowed in a regular FIFA match?",
+    "answers": [
+      "3", 
+      "4", 
+      "5", 
+      "Unlimited"
+    ],
+    "correct_answer": "5",
+    "image": "https://i.postimg.cc/Sss9Qc3S/fb7.jpg"
+  },
+  {
+    "question": "Which country is hosting the FIFA World Cup in 2022?",
+    "answers": [
+      "Qatar", 
+      "Russia", 
+      "United States", 
+      "Canada"
+    ],
+    "correct_answer": "Qatar",
+    "image": "https://i.postimg.cc/7Z30KHSk/fb8.jpg"
+  },
+  {
+    "question": "Who scored the 'Hand of God' goal in the World Cup?",
+    "answers": [
+      "Diego Maradona", 
+      "Pelé", 
+      "Lionel Messi", "Neymar"
+    ],
+    "correct_answer": "Diego Maradona",
+    "image": "https://i.postimg.cc/dVPGRkk6/fb9.jpg"
+  },
+  {
+    "question": "Which team is known as 'The Red Devils'?",
+    "answers": [
+      "Liverpool", 
+      "Arsenal", 
+      "Manchester United", 
+      "AC Milan"
+    ],
+    "correct_answer": "Manchester United",
+    "image": "https://i.postimg.cc/rpqWbB9t/fb10.jpg"
+  }
+]

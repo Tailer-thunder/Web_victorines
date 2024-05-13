@@ -1,0 +1,110 @@
+[
+  {
+    "question": "When was Rus' baptized?",
+    "answers": [
+      "48 BC",
+      "877 AD",
+      "988 AD",
+      "1015 AD",
+      "1054 AD",
+      "1209 AD",
+      "1540 AD",
+      "2013 AD"
+    ],
+    "correct_answer": "988 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  },
+  {
+    "question": "When did the Mongol invasion of Rus' begin?",
+    "answers": [
+      "1223 AD",
+      "1237 AD",
+      "1300 AD",
+      "1240 AD",
+      "1252 AD"
+    ],
+    "correct_answer": "1237 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  },
+  {
+    "question": "When was serfdom abolished in Russia?",
+    "answers": [
+      "1855 AD",
+      "1861 AD",
+      "1905 AD",
+      "1917 AD"
+    ],
+    "correct_answer": "1861 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  },
+  {
+    "question": "When did the October Revolution occur?",
+    "answers": [
+      "1905 AD",
+      "1912 AD",
+      "1915 AD",
+      "1917 AD",
+      "1899 AD",
+      "1919 AD"
+    ],
+    "correct_answer": "1917 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  },
+  {
+    "question": "What war is shown on the map?",
+    "answers": [
+      "Soviet-Finnish War",
+      "Soviet-Japanese War",
+      "World War II",
+      "Vietnam War"
+    ],
+    "correct_answer": "World War II",
+    "image": "https://i.postimg.cc/mrtzctF6/twowar.jpg"
+  },
+  {
+    "question": "When did the Great Patriotic War (World War II) begin?",
+    "answers": [
+      "1943 AD",
+      "1951 AD",
+      "1941 AD",
+      "1939 AD"
+    ],
+    "correct_answer": "1941 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  },
+  {
+    "question": "When was the first Soviet satellite, Sputnik-1, launched?",
+    "answers": [
+      "1949 AD",
+      "1952 AD",
+      "1953 AD",
+      "1954 AD",
+      "1955 AD",
+      "1957 AD"
+    ],
+    "correct_answer": "1957 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  },
+  {
+    "question": "When did the Soviet Union collapse?",
+    "answers": [
+      "1989 AD",
+      "1991 AD",
+      "1992 AD",
+      "1986 AD"
+    ],
+    "correct_answer": "1991 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  },
+  {
+    "question": "When did the Chernobyl disaster occur?",
+    "answers": [
+      "1976 AD",
+      "1978 AD",
+      "1984 AD",
+      "1986 AD"
+    ],
+    "correct_answer": "1986 AD",
+    "image": "https://i.postimg.cc/L52Yyvnn/russiaussr.png"
+  }
+]

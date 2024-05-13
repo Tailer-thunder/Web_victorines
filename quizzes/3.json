@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Which quote was spoken in the movie:\n\"Star Wars: Episode V - The Empire Strikes Back\"?",
+    "answers": [
+      "\"Luke, I am your brother.\"",
+      "\"Luke, I am your father.\"",
+      "\"Luke, I am your uncle.\"",
+      "Luke, I am your mentor."
+    ],
+    "correct_answer": "\"Luke, I am your father.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"Star Wars: Episode III - Revenge of the Sith\"?",
+    "answers": [
+      "\"I'm in danger, Skywalker. Save me.\"",
+      "\"I'm here to save you, Obi-Wan.\"",
+      "\"I'm not in danger, Skywalker. I'm here to save you.\"",
+      "\"I'm here to fight Darth Vader.\""
+    ],
+    "correct_answer": "\"I'm not in danger, Skywalker. I'm here to save you.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the TV series:\n\"Friends\"?",
+    "answers": [
+      "\"Remember, everyone is perfect.\"",
+      "\"Remember, mistakes cannot be forgiven.\"",
+      "\"Remember, perfection is unattainable.\"",
+      "\"Remember, nobody's perfect. Everyone makes mistakes, but it's important to learn from them.\""
+    ],
+    "correct_answer": "\"Remember, nobody's perfect. Everyone makes mistakes, but it's important to learn from them.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"Braveheart\"?",
+    "answers": [
+      "\"The world belongs to those who are rich and powerful.\"",
+      "\"The world belongs to those who follow the rules.\"",
+      "\"The world belongs to those who are lucky.\"",
+      "\"The world belongs to those who are brave enough to seize it.\""
+    ],
+    "correct_answer": "\"The world belongs to those who are brave enough to seize it.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"The Notebook\"?",
+    "answers": [
+      "\"If you love someone, let them go.\"",
+      "\"If you love someone, hold onto them with all your might.\"",
+      "\"If you love someone, never let them go.\"",
+      "\"If you love someone, they will always be yours.\""
+    ],
+    "correct_answer": "\"If you love someone, let them go.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"The Pursuit of Happyness\"?",
+    "answers": [
+      "\"Don't listen to others and follow your dreams.\"",
+      "\"If people tell you that you can't do something, it means you can.\"",
+      "\"Give up on your dream if it's too difficult.\"",
+      "\"Don't let anyone tell you that you can't do something. If you have a dream, you have to protect it.\""
+    ],
+    "correct_answer": "\"Don't let anyone tell you that you can't do something. If you have a dream, you have to protect it.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"Into the Woods\"?",
+    "answers": [
+      "\"I believe that everything happens for a reason. Destiny brings us to the people who are meant to enter our lives.\"",
+      "\"I believe that all coincidences are random.\"",
+      "\"Destiny doesn't exist. Following it will never bring someone into your life.\"",
+      "\"No matter what obstacles we face, our hope will guide us.\""
+    ],
+    "correct_answer": "\"I believe that everything happens for a reason. Destiny brings us to the people who are meant to enter our lives.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"The Truman Show\"?",
+    "answers": [
+      "\"To live is to die slowly.\"",
+      "\"To live is to be in the present moment.\"",
+      "\"Memories are meaningless.\"",
+      "\"Life is a gift that we must cherish.\""
+    ],
+    "correct_answer": "\"To live is to die slowly.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"A Bronx Tale\"?",
+    "answers": [
+      "\"Forgiveness changes nothing. Just be yourself.\"",
+      "\"To be happy, you don't need anyone's forgiveness.\"",
+      "\"Forgiveness is weakness.\"",
+      "\"You can never truly be yourself until you forgive yourself.\""
+    ],
+    "correct_answer": "\"You can never truly be yourself until you forgive yourself.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  },
+  {
+    "question": "Which quote was spoken in the movie:\n\"Mission: Impossible\"?",
+    "answers": [
+      "\"In life, there are many impossible things.\"",
+      "\"Impossibility is reality.\"",
+      "\"Impossible is just a temporary illusion.\"",
+      "\"Illusions don't matter.\""
+    ],
+    "correct_answer": "\"Impossible is just a temporary illusion.\"",
+    "image": "https://i.postimg.cc/pXMqvtnF/tvshow.jpg"
+  }
+]

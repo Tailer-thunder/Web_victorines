@@ -1,0 +1,134 @@
+[
+  {
+    "question": "What is the name of Japanese traditional clothing?",
+    "answers": [
+      "Hanbok",
+      "Kimono",
+      "Sari",
+      "Cheongsam"
+    ],
+    "correct_answer": "Kimono",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "What is sakura in Japanese culture?",
+    "answers": [
+      "Japanese holiday",
+      "Geographic name",
+      "Japanese military equipment",
+      "Cherry blossoms"
+    ],
+    "correct_answer": "Cherry blossoms",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "What is the name of the Japanese art of decorating objects with gold or silver?",
+    "answers": [
+      "Origami",
+      "Ikebana",
+      "Ukiyo-e",
+      "Maki-e"
+    ],
+    "correct_answer": "Maki-e",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "Which mountain is shown in the picture?",
+    "answers": [
+      "Tate",
+      "Fuji",
+      "Kita",
+      "Yotei"
+    ],
+    "correct_answer": "Fuji",
+    "image": "https://i.postimg.cc/QC8rtY6g/fudziyama.jpg"
+  },
+  {
+    "question": "What is a samurai?",
+    "answers": [
+      "Japanese dance",
+      "Japanese tea",
+      "Japanese warrior",
+      "Japanese dish"
+    ],
+    "correct_answer": "Japanese warrior",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "What is the name of the Japanese traditional theater genre in which actors perform folk tales and legends?",
+    "answers": [
+      "Noh",
+      "Kabuki",
+      "Bunraku",
+      "Enka"
+    ],
+    "correct_answer": "Kabuki",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "What is the name of the Japanese tea ceremony?",
+    "answers": [
+      "Sushi",
+      "Izakaya",
+      "Sake",
+      "Chado"
+    ],
+    "correct_answer": "Chado",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "Which garden is shown in the picture?",
+    "answers": [
+      "Shukken",
+      "Farm Tomita",
+      "Hama Rikyu",
+      "Rikugien"
+    ],
+    "correct_answer": "Hama Rikyu",
+    "image": "https://i.postimg.cc/Vvh1VBRj/hamarikyu.jpg"
+  },
+  {
+    "question": "Which day is celebrated as the National Emperor's Birthday Holiday in Japan?",
+    "answers": [
+      "May 1st",
+      "November 11",
+      "February 23",
+      "April 29"
+    ],
+    "correct_answer": "April 29",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "What is the name of the classic Japanese folding knife?",
+    "answers": [
+      "Katana",
+      "Wakizashi",
+      "Tanto",
+      "Higonokami"
+    ],
+    "correct_answer": "Katana",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "What is a geisha in Japanese culture?",
+    "answers": [
+      "Female profession",
+      "Japanese trampoline",
+      "Japanese Beatles",
+      "Japanese instrument"
+    ],
+    "correct_answer": "Female profession",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  },
+  {
+    "question": "What is the name of the Japanese art of arranging bouquets of fresh flowers?",
+    "answers": [
+      "Sumi-e",
+      "Mizuhiki",
+      "Ikebana",
+      "Kintsugi"
+    ],
+    "correct_answer": "Ikebana",
+    "image": "https://i.postimg.cc/Kj99F8Bz/japan.jpg"
+  }
+]

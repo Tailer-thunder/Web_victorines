@@ -1,0 +1,112 @@
+[  
+  {
+    "question": "Which character is the legitimate heir to the Iron Throne?",
+    "answers": [
+      "Daenerys Targaryen",
+      "Cersei Lannister", 
+      "Jon Snow", 
+      "Theon Greyjoy"
+    ],
+    "correct_answer": "Jon Snow",
+    "image": "https://i.postimg.cc/Kc364wnT/got1-10.jpg"
+  },
+  {
+    "question": "What is the Stark family's sigil?",
+    "answers": [
+      "Lion", 
+      "Raven", 
+      "Wolf", 
+      "Dragon"
+    ],
+    "correct_answer": "Wolf",
+    "image": "https://i.postimg.cc/4NzjQc2N/got2.jpg"
+  },
+  {
+    "question": "Who killed Ned Stark?",
+    "answers": [
+      "Jaime Lannister", 
+      "Joffrey Baratheon", 
+      "Ilyn Payne", 
+      "Theon Greyjoy"
+    ],
+    "correct_answer": "Ilyn Payne",
+    "image": "https://i.postimg.cc/pXNgjCZ6/got3.jpg"
+  },
+  {
+    "question": "Who stole Daenerys Targaryen's dragons?",
+    "answers": [
+      "Jon Snow", 
+      "Khal Drogo", 
+      "Xaro Xhoan Daxos", 
+      "Pirates"
+    ],
+    "correct_answer": "Xaro Xhoan Daxos",
+    "image": "https://i.postimg.cc/7ZwdsLj1/got4-5.jpg"
+  },
+  {
+    "question": "What was the name of the dragon belonging to Daenerys Targaryen that died in the sixth season?",
+    "answers": [
+      "Rhaegal", 
+      "Viserion", 
+      "Drogon", 
+      "Drogo"
+    ],
+    "correct_answer": "Viserion",
+    "image": "https://i.postimg.cc/7ZwdsLj1/got4-5.jpg"
+  },
+  {
+    "question": "What was the capital of the Seven Kingdoms before the events of the series?",
+    "answers": [
+      "Winterfell", 
+      "Starkhaven", 
+      "King's Landing", 
+      "Dragonstone"
+    ],
+    "correct_answer": "King's Landing",
+    "image": "https://i.postimg.cc/9QbSvhj6/got6.jpg"
+  },
+  {
+    "question": "Who became the King Beyond the Wall after the events of the series?",
+    "answers": [
+      "Tormund", 
+      "Jon Snow", 
+      "Mance Rayder", 
+      "Bran Stark"
+    ],
+    "correct_answer": "Jon Snow",
+    "image": "https://i.postimg.cc/9ffS2nmr/got7.jpg"
+  },
+  {
+    "question": "What was the name of Ned Stark's eldest brother?",
+    "answers": [
+      "Eddard", 
+      "Benjen", 
+      "Hoster", 
+      "Edmure"
+    ],
+    "correct_answer": "Benjen",
+    "image": "https://i.postimg.cc/43F0xQyw/got8.jpg"
+  },
+  {
+    "question": "Who killed Ramsay Bolton?",
+    "answers": [
+      "Ser Davos", 
+      "Sandor Clegane", 
+      "Theon Greyjoy", 
+      "Sansa Stark"
+    ],
+    "correct_answer": "Sansa Stark",
+    "image": "https://i.postimg.cc/gJXTXL6p/got9.jpg"
+  },
+  {
+    "question": "Who claimed the Iron Throne at the end of the 'Game of Thrones' series?",
+    "answers": [
+      "Jon Snow", 
+      "Daenerys Targaryen", 
+      "Tyrion Lannister", 
+      "Bran Stark"
+    ],
+    "correct_answer": "Bran Stark",
+    "image": "https://i.postimg.cc/Kc364wnT/got1-10.jpg"
+  }
+]

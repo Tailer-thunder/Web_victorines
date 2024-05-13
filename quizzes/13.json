@@ -1,0 +1,112 @@
+[
+  {
+    "question": "Which player is known as 'The King'?",
+    "answers": [
+      "Kobe Bryant", 
+      "LeBron James", 
+      "Michael Jordan", 
+      "Kevin Durant"
+    ],
+    "correct_answer": "LeBron James",
+    "image": "https://i.postimg.cc/vHL5z8rd/nba1-3-4-9-10.jpg"
+  },
+  {
+    "question": "Which team won the NBA Championship in 2020?",
+    "answers": [
+      "Miami Heat", 
+      "Los Angeles Lakers", 
+      "Toronto Raptors", 
+      "Golden State Warriors"
+    ],
+    "correct_answer": "Los Angeles Lakers",
+    "image": "https://i.postimg.cc/vZ09JP2q/nba2.jpg"
+  },
+  {
+    "question": "Who is the NBA's all-time leading scorer?",
+    "answers": [
+      "Kareem Abdul-Jabbar", 
+      "LeBron James", 
+      "Karl Malone", 
+      "Kobe Bryant"
+    ],
+    "correct_answer": "Lebron James",
+    "image": "https://i.postimg.cc/vHL5z8rd/nba1-3-4-9-10.jpg"
+  },
+  {
+    "question": "What is the maximum number of players allowed on an NBA roster?",
+    "answers": [
+      "12", 
+      "15", 
+      "16", 
+      "13"
+    ],
+    "correct_answer": "15",
+    "image": "https://i.postimg.cc/vHL5z8rd/nba1-3-4-9-10.jpg"
+  },
+  {
+    "question": "Which player has the most MVP awards?",
+    "answers": [
+      "Michael Jordan", 
+      "LeBron James", 
+      "Kareem Abdul-Jabbar", 
+      "Bill Russell"
+    ],
+    "correct_answer": "Kareem Abdul-Jabbar",
+    "image": "https://i.postimg.cc/0ykDHgnK/nba5.jpg"
+  },
+  {
+    "question": "Which team drafted Kobe Bryant?",
+    "answers": [
+      "Los Angeles Lakers", 
+      "Charlotte Hornets", 
+      "Philadelphia 76ers", 
+      "Boston Seltics"
+    ],
+    "correct_answer": "Charlotte Hornets",
+    "image": "https://i.postimg.cc/Ls7PXJpj/nba6.jpg"
+  },
+  {
+    "question": "What year was the NBA founded?",
+    "answers": [
+      "1946", 
+      "1951", 
+      "1937", 
+      "1966"
+    ],
+    "correct_answer": "1946",
+    "image": "https://i.postimg.cc/1z46spL9/nba7.jpg"
+  },
+  {
+    "question": "Which player scored 100 points in a single game?",
+    "answers": [
+      "Wilt Chamberlain", 
+      "Michael Jordan", 
+      "Kobe Bryant", 
+      "Shaquille O'Neal"
+    ],
+    "correct_answer": "Wilt Chamberlain",
+    "image": "https://i.postimg.cc/G2yysbLV/nba8.jpg"
+  },
+  {
+    "question": "Which team has the most NBA Finals appearances?",
+    "answers": [
+      "Boston Celtics", 
+      "Los Angeles Lakers", 
+      "Chicago Bulls", 
+      "San Antonio Spurs"
+    ],
+    "correct_answer": "Los Angeles Lakers",
+    "image": "https://i.postimg.cc/vHL5z8rd/nba1-3-4-9-10.jpg"
+  },
+  {
+    "question": "Who is known for the phrase 'Practice? We're talking about practice'?",
+    "answers": [
+      "Allen Iverson", 
+      "Shaquille O'Neal", 
+      "Charles Barkley", 
+      "Tim Duncan"
+    ],
+    "correct_answer": "Allen Iverson",
+    "image": "https://i.postimg.cc/vHL5z8rd/nba1-3-4-9-10.jpg"
+  }
+]
